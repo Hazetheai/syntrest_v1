@@ -1,33 +1,233 @@
-.App {
-  text-align: center;
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+  80% {
+    transform: translateX(1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+  80% {
+    transform: translateX(-1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: #c4c4c4;
+}
+
+.heading-primary {
+  color: azure;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  margin-bottom: 60px;
+}
+.heading-primary--main {
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+  animation: moveInLeft 1s ease-in-out;
+  /* animation-delay: 3s; */
+}
+@media only screen and (max-width: 37.5em) {
+  .heading-primary--main {
+    letter-spacing: 1rem;
+    font-family: 5rem;
+  }
+}
+.heading-primary--sub {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1.75rem;
+  animation: moveInRight 1s ease-in-out;
+}
+@media only screen and (max-width: 37.5em) {
+  .heading-primary--sub {
+    letter-spacing: 0.5rem;
+  }
+}
+
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-image: linear-gradient(to right, #141414, #540000);
+  display: inline-block;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 0.2rem;
+  transition: all 0.3s;
+}
+@media only screen and (max-width: 56.25em) {
+  .heading-secondary {
+    font-size: 3rem;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .heading-secondary {
+    font-size: 2.5rem;
+  }
+}
+.heading-secondary:hover {
+  transform: skewY(0.5deg) skewX(3deg) scale(1.05);
+  text-shadow: 0.5rem 1rem 2rem rgba(17, 17, 17, 0.2);
+}
+
+.heading-tertiary {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.paragraph {
+  font-size: 1.6rem;
+}
+.paragraph:not(:last-child) {
+  margin-bottom: 3rem;
+}
+
+.btn,
+.btn:link,
+.btn:visited {
+  background-color: azure;
+  padding: 0.4rem 0.6rem 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  border: transparent;
+  margin: 0.4rem;
+  outline: none;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+  position: relative;
+  font-size: 1.6rem;
+}
+
+.btn:hover {
+  transform: translateY(-0.1px);
+  box-shadow: 0 1rem 2rem rgba(17, 17, 17, 0.2);
+}
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 0.5rem 1rem rgba(17, 17, 17, 0.2);
+}
+
+.btn--more {
+  padding: 0.8rem 0.6rem 0.8rem 0.6rem;
+  border: solid 1px #333;
+}
+
+.btn--share {
+  background-color: #419dd9;
+}
+
+.btn--save {
+  border: solid 1px #333;
+}
+
+.btn--fullscreen {
+  width: 5rem;
+  height: 5rem;
+  background-color: transparent;
+}
+
+.card {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 32rem;
+  width: 32rem;
+  height: 56.8rem;
+  border: solid #777;
+  border-radius: 2rem;
+  background-color: azure;
+}
+.card__nav {
+  display: flex;
+  margin: 2rem;
+}
+.card__image {
+  display: block;
+  width: 30rem;
+  height: 35.4rem;
+  background-color: #c4c4c4;
+  border-radius: 2rem;
+}
+.card__comment {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+}
+.card__btn--more {
+  margin-right: 10rem;
+}
+.card__btn--fullscreen {
+  margin: 1rem 0 0 24rem;
+}
+
+.comment {
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  border: transparent;
+  background-color: #cec8c8;
+  width: 25rem;
+  font-size: 1.5rem;
+  font-family: inherit;
+  padding: 1rem 2rem;
+  outline: none;
+  color: #111;
+}
+.comment::placeholder {
+  color: #111;
+}
+.comment--previous {
+  margin-left: 3rem;
+}
+
+.section-fullscreen {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 15rem 0 25rem 0;
+  margin: auto;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.section-fullscreen {
+  background-color: #c4c4c4;
 }
