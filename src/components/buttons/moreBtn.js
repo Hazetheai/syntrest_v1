@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Button } from "./button";
+import { Button } from "./Button";
 
 export const MoreBtn = props => {
   return (
