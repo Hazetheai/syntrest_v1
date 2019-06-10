@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import { jsx } from "@emotion/core";
-import { FullScreenBtn } from "../buttons/fullscreenBtn";
+import { FullScreenBtn } from "../buttons/FullscreenBtn";
 
 const CardImg = props => {
   return (
