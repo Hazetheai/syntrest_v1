@@ -8,8 +8,7 @@ const ProfileBtn = props => {
   return (
     <Button
       css={{
-        backgroundColor: "black",
-        color: "#003b00"
+        backgroundColor: "black"
       }}
       {...props}
     >

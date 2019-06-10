@@ -7,11 +7,19 @@ import { Comment } from "./components/cards/Comment";
 import CardImg from "./components/cards/CardImage";
 import SoloCard from "./components/cards/Card";
 import Home from "./components/layouts/Home";
+import MainNav from "./components/nav/MainNav";
+import Header from "./components/header/Header";
+import Search from "./components/header/Search";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
+      <Header>
+        <Search />
+        <MainNav />
+      </Header>
+
       <Home />
       <SoloCard>
         <Nav>

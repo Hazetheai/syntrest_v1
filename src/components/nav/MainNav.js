@@ -16,12 +16,21 @@ export default class MainNav extends Component {
   }
   render() {
     return (
-      <div>
-        <nav className="Nav">
-          <AddSynBtn text="+" />
-          <ProfileBtn text="Lair" />
-        </nav>
-      </div>
+      <nav
+        className="Nav"
+        css={{
+          display: "inline-flex",
+          flexWrap: "nowrap",
+          padding: "5px",
+          margin: "0 10px",
+          width: "fit-content",
+          justifySelf: "flex-end"
+        }}
+        {...this.props}
+      >
+        <AddSynBtn text="+" />
+        <ProfileBtn text="Lair" />
+      </nav>
     );
   }
 }

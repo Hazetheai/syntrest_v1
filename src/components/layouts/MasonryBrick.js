@@ -40,6 +40,7 @@ export class MasonryBrick extends Component {
               opacity: "0.7"
             }
           }}
+          {...this.props}
         >
           <img
             className="masonry-image"

@@ -25,6 +25,7 @@ export default class Home extends Component {
               flexFlow: "row wrap",
               width: "100%"
             }}
+            {...this.props}
           >
             <Brick />
             <Brick />

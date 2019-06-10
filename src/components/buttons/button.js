@@ -6,7 +6,8 @@ import { jsx } from "@emotion/core";
 export const Button = props => (
   <button
     css={{
-      backgroundColor: "azure",
+      backgroundColor: "black",
+      color: "#008F11",
       cursor: "pointer",
       padding: "0.4rem 0.6rem 0.4rem 0.6rem",
       borderRadius: "0.5rem",
