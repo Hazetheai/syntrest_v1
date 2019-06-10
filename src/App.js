@@ -1,16 +1,18 @@
 import React from "react";
-import { ShareBtn } from "./components/buttons/shareBtn";
-import { SaveBtn } from "./components/buttons/saveBtn";
-import { MoreBtn } from "./components/buttons/moreBtn";
-import { CardNav as Nav } from "./components/nav/cardNav";
-import { Comment } from "./components/cards/comment";
-import CardImg from "./components/cards/cardImage";
-import SoloCard from "./components/cards/card";
+import { ShareBtn } from "./components/buttons/ShareBtn";
+import { SaveBtn } from "./components/buttons/SaveBtn";
+import { MoreBtn } from "./components/buttons/MoreBtn";
+import { CardNav as Nav } from "./components/nav/CardNav";
+import { Comment } from "./components/cards/Comment";
+import CardImg from "./components/cards/CardImage";
+import SoloCard from "./components/cards/Card";
+import Home from "./components/layouts/Home";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
+      <Home />
       <SoloCard>
         <Nav>
           <MoreBtn text="More" />
