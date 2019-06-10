@@ -2,6 +2,7 @@ import React from "react";
 import { ShareBtn } from "./components/buttons/ShareBtn";
 import { SaveBtn } from "./components/buttons/SaveBtn";
 import { MoreBtn } from "./components/buttons/MoreBtn";
+import HomeBtn from "./components/buttons/HomeBtn";
 import { CardNav as Nav } from "./components/nav/CardNav";
 import { Comment } from "./components/cards/Comment";
 import CardImg from "./components/cards/CardImage";
@@ -16,6 +17,7 @@ function App() {
   return (
     <div className="App">
       <Header>
+        <HomeBtn />
         <Search />
         <MainNav />
       </Header>

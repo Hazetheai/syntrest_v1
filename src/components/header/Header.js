@@ -18,9 +18,11 @@ export class Header extends Component {
           position: "relative",
           top: "0",
           left: "0",
-          width: "100vw",
           minHeight: "25px",
-          padding: "5px 10px"
+          padding: "5px 10px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
         }}
         {...this.props}
       />
