@@ -6,7 +6,7 @@ export const ShareBtn = props => {
   return (
     <Button
       css={{
-        backgroundColor: "#419dd9"
+        backgroundColor: "#d0d5db"
       }}
     >
       {props.text}
