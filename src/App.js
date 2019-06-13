@@ -11,6 +11,8 @@ import Home from "./components/layouts/Home";
 import MainNav from "./components/nav/MainNav";
 import Header from "./components/header/Header";
 import Search from "./components/header/Search";
+import Login from "./components/layouts/Login";
+import Signup from "./components/layouts/Signup";
 import "./App.css";
 
 function App() {
@@ -32,6 +34,9 @@ function App() {
         <CardImg />
         <Comment prevComment="A previous comment" />
       </SoloCard>
+
+      <Signup />
+      <Login />
     </div>
   );
 }
