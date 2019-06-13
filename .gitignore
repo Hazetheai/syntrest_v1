@@ -5,14 +5,28 @@
 /front-end/node_modules
 /front-end/.pnp
 /front-end/.pnp.js
+<<<<<<< HEAD
 
+=======
+>>>>>>> split_back_front
 
+/back-end/node_modules
+/back-end/.pnp
+/back-end/.pnp.js
 # testing
 /front-end/coverage
+<<<<<<< HEAD
 
 
 # production
 /front-end/build
+=======
+/back-end/coverage
+
+# production
+/front-end/build
+/back-end/build
+>>>>>>> split_back_front
 
 
 # misc
@@ -22,19 +36,40 @@
 .env.test.local
 .env.production.local
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> split_back_front
 /front-end/.DS_Store
 /front-end/.env.local
 /front-end/.env.development.local
 /front-end/.env.test.local
 /front-end/.env.production.local
 
+<<<<<<< HEAD
+=======
+/back-end/.DS_Store
+/back-end/.env.local
+/back-end/.env.development.local
+/back-end/.env.test.local
+/back-end/.env.production.local
+>>>>>>> split_back_front
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+<<<<<<< HEAD
 
 /front-end/npm-debug.log*
 /front-end/yarn-debug.log*
 /front-end/yarn-error.log*
+=======
+/front-end/npm-debug.log*
+/front-end/yarn-debug.log*
+/front-end/yarn-error.log*
+
+/back-end/npm-debug.log*
+/back-end/yarn-debug.log*
+/back-end/yarn-error.log*
+>>>>>>> split_back_front
