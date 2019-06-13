@@ -2,8 +2,6 @@
 import { jsx } from "@emotion/core";
 import { Button } from "./Button";
 
-import React from "react";
-
 const AddSynBtn = props => {
   return (
     <Button

@@ -2,8 +2,6 @@
 import { jsx } from "@emotion/core";
 import { Button } from "./Button";
 
-import React from "react";
-
 export default function HomeBtn(props) {
   return (
     <Button

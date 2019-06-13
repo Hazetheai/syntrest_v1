@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import React, { Component } from "react";
+import { Component } from "react";
 import { MasonryBrick as Brick } from "./MasonryBrick";
 
 export default class Home extends Component {

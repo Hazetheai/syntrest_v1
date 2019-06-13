@@ -2,7 +2,7 @@
 
 import { jsx } from "@emotion/core";
 
-import React, { Component } from "react";
+import { Component } from "react";
 
 export class Header extends Component {
   constructor(props) {

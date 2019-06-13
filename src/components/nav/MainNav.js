@@ -4,7 +4,7 @@ import { jsx } from "@emotion/core";
 import AddSynBtn from "../buttons/AddSynBtn";
 import ProfileBtn from "../buttons/ProfileBtn";
 
-import React, { Component } from "react";
+import { Component } from "react";
 
 export default class MainNav extends Component {
   constructor(props) {
