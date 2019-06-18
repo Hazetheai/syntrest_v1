@@ -1,7 +1,6 @@
 // this comment tells babel to convert jsx to calls to a function called jsx instead of React.createElement
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-// import { css as emoCSS } from "emotion";
 
 export const Button = props => (
   <button
@@ -29,5 +28,7 @@ export const Button = props => (
       "&:active": { transform: "scale(0.97)" }
     }}
     {...props} // <- props contains the `className` prop
-  />
+  >
+    {props.text}
+  </button>
 );

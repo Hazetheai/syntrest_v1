@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import { Link } from "react-router-dom";
 import { Button } from "./Button";
 
 export default function HomeBtn(props) {
@@ -10,14 +11,16 @@ export default function HomeBtn(props) {
       }}
       {...props}
     >
-      <img
-        src={require("../../images/logo.png")}
-        alt="Syntrest Logo"
-        css={{
-          width: "30px",
-          height: "30px"
-        }}
-      />
+      <Link to="/">
+        <img
+          src={require("../../images/logo.png")}
+          alt="Syntrest Logo"
+          css={{
+            width: "30px",
+            height: "30px"
+          }}
+        />
+      </Link>
     </Button>
   );
 }

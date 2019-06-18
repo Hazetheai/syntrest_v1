@@ -5,12 +5,11 @@ import { Button } from "./Button";
 export const FullScreenBtn = props => {
   return (
     <Button
+      text="FS"
       css={{
         backgroundColor: "transparent",
         position: "absolute"
       }}
-    >
-      {props.text}
-    </Button>
+    />
   );
 };
