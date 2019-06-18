@@ -3,6 +3,8 @@
 import { Component } from "react";
 import { jsx } from "@emotion/core";
 
+import { Button } from "../buttons/Button";
+
 export default class Signup extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,7 @@ export default class Signup extends Component {
       >
         <h2>Sign up!</h2>
         <h3>Delicious data... Nom nom nom.</h3>
-        <label for="name">Name</label>
+        <label htmlFor="name">Name</label>
         <input
           type="text"
           name="signup"
@@ -37,7 +39,7 @@ export default class Signup extends Component {
           }}
           {...this.props}
         />
-        <label for="email">Name</label>
+        <label htmlFor="email">Name</label>
 
         <input
           type="email"
@@ -55,7 +57,7 @@ export default class Signup extends Component {
           }}
           {...this.props}
         />
-        <label for="password">Name</label>
+        <label htmlFor="password">Name</label>
 
         <input
           type="password"
@@ -71,12 +73,12 @@ export default class Signup extends Component {
           }}
           {...this.props}
         />
-        <label for="passwordConfirmation">Name</label>
+        <label htmlFor="passwordConfirmation">Name</label>
 
         <input
           type="password"
           name="signup"
-          id="password"
+          id="password2"
           css={{
             width: "200px",
 
@@ -87,6 +89,7 @@ export default class Signup extends Component {
           }}
           {...this.props}
         />
+        <Button text="Submit" />
       </div>
     );
   }

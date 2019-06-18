@@ -3,6 +3,8 @@
 import { Component } from "react";
 import { jsx } from "@emotion/core";
 
+import { Button } from "../buttons/Button";
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -48,6 +50,7 @@ export default class Login extends Component {
           }}
           {...this.props}
         />
+        <Button text="Submit" />
       </div>
     );
   }
