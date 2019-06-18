@@ -4,10 +4,10 @@
   "description": "Back-end for Syntrest - A full stack MERN app",
   "main": "server.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
+    "client-install": "npm install --prefix ../front-end",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix client",
+    "client": "npm start --prefix ../front-end",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Jake Riordan",
