@@ -1,6 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const passport = require("passport");
+
+const users = require("./routes/api/users");
 
 const app = express();
 
@@ -22,7 +25,16 @@ mongoose
   .then(() => console.log("Mongo is a go go"))
   .catch(err => console.log(err));
 
-// process.env.port is Heroku's port if you choose to deploy the app there
+// Passport Middleware
+app.use(passport.initialize());
+
+// Passport config
+require("./config/passport")(passport);
+
+// Routes
+
+app.use("/api/users", users);
+
 const port = 5000;
 
-app.listen(port, () => console.log(`All systems are gon on port ${port}`));
+app.listen(port, () => console.log(`All systems are on on port ${port}`));
