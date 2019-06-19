@@ -1,7 +1,6 @@
 /** @jsx jsx */
 
 import { jsx } from "@emotion/core";
-import { Link } from "react-router-dom";
 
 import AddSynBtn from "../buttons/AddSynBtn";
 import ProfileBtn from "../buttons/ProfileBtn";

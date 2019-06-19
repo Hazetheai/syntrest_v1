@@ -42,9 +42,7 @@ export const Comment = props => {
           outline: "none",
           color: "#111"
         }}
-      >
-        {props.prevComment}
-      </p>
+      />
     </div>
   );
 };
