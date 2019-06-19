@@ -6,7 +6,7 @@ import { jsx } from "@emotion/core";
 
 import { Button } from "../buttons/Button";
 
-export default class Signup extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
 
@@ -140,3 +140,5 @@ export default class Signup extends Component {
     );
   }
 }
+
+export default Register;
