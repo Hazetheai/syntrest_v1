@@ -23,7 +23,7 @@ import Register from "./components/auth/Register";
 
 function App() {
   return (
-    <Provider>
+    <Provider store={store}>
       <Router>
         {" "}
         <div className="App">
