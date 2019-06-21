@@ -6,9 +6,15 @@ import { logoutUser } from "../../actions/authActions";
 
 import { jsx } from "@emotion/core";
 import { MasonryBrick as Brick } from "../layouts/MasonryBrick";
+import { Button } from "../buttons/Button";
 
-export default class Home extends Component {
+class Home extends Component {
+  onLogoutClick = e => {
+    e.preventDefault();
+    this.props.logoutUser();
+  };
   render() {
+    const { user } = this.props.auth;
     return (
       <div>
         <section
@@ -22,6 +28,8 @@ export default class Home extends Component {
           }}
           className="masonry-container"
         >
+          {/* <b>Hey there,</b> {user.name.split(" ")[0]} */}
+          <Button text="Logout" onClick={this.onLogoutClick} />
           <div
             className="masonry"
             css={{
@@ -42,3 +50,17 @@ export default class Home extends Component {
     );
   }
 }
+
+Home.prototypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Home);
