@@ -1,7 +1,11 @@
 /** @jsx jsx */
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
+
 import { jsx } from "@emotion/core";
-import { Component } from "react";
-import { MasonryBrick as Brick } from "./MasonryBrick";
+import { MasonryBrick as Brick } from "../layouts/MasonryBrick";
 
 export default class Home extends Component {
   render() {

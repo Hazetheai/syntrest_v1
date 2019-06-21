@@ -1,12 +1,16 @@
 /** @jsx jsx */
 
 import { Component } from "react";
-import { jsx } from "@emotion/core";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/authActions";
+import classnames from "classnames";
+import { jsx } from "@emotion/core";
 
 import { Button } from "../buttons/Button";
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -15,6 +19,18 @@ export default class Login extends Component {
       email: "",
       errors: {}
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("./Home"); // push user to dashboard when they login
+    }
+
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
   }
 
   onChange = e => {
@@ -28,7 +44,7 @@ export default class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    console.log(userData);
+    this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
   };
 
   render() {
@@ -52,7 +68,10 @@ export default class Login extends Component {
 
         <form noValidate onSubmit={this.onSubmit}>
           <label htmlFor="email">Email</label>
-
+          <span className="red-text">
+            {errors.email}
+            {errors.emailnotfound}
+          </span>
           <input
             onChange={this.onChange}
             value={this.state.email}
@@ -62,6 +81,9 @@ export default class Login extends Component {
             inputMode="email"
             placeholder="email address"
             id="email"
+            className={classnames("", {
+              invalid: errors.email || errors.emailnotfound
+            })}
             css={{
               width: "200px",
               padding: "10px",
@@ -72,6 +94,10 @@ export default class Login extends Component {
             {...this.props}
           />
           <label htmlFor="password">Password</label>
+          <span className="red-text">
+            {errors.password}
+            {errors.passwordincorrect}
+          </span>
 
           <input
             onChange={this.onChange}
@@ -80,6 +106,9 @@ export default class Login extends Component {
             type="password"
             name="login"
             id="password"
+            className={classnames("", {
+              invalid: errors.password || errors.passwordincorrect
+            })}
             css={{
               width: "200px",
               padding: "10px",
@@ -95,3 +124,17 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login);

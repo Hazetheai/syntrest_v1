@@ -1,7 +1,11 @@
 /** @jsx jsx */
 
 import { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
+import classnames from "classnames";
 import { jsx } from "@emotion/core";
 
 import { Button } from "../buttons/Button";
@@ -19,6 +23,12 @@ class Register extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -32,7 +42,8 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2
     };
-    console.log(newUser);
+    // console.log(newUser);
+    this.props.registerUser(newUser, this.props.history);
   };
 
   render() {
@@ -58,6 +69,8 @@ class Register extends Component {
         </div>
         <form noValidate onSubmit={this.onSubmit}>
           <label htmlFor="name">Name</label>
+          <span className="red-text">{errors.name}</span>
+
           <input
             onChange={this.onChange}
             value={this.state.name}
@@ -66,6 +79,9 @@ class Register extends Component {
             name="signup"
             placeholder="your name"
             id="name"
+            className={classnames("", {
+              invalid: errors.name
+            })}
             css={{
               width: "200px",
               padding: "10px",
@@ -76,6 +92,7 @@ class Register extends Component {
             {...this.props}
           />
           <label htmlFor="email">Email</label>
+          <span className="red-text">{errors.email}</span>
 
           <input
             onChange={this.onChange}
@@ -86,6 +103,9 @@ class Register extends Component {
             inputMode="email"
             placeholder="email address"
             id="email"
+            className={classnames("", {
+              invalid: errors.email
+            })}
             css={{
               width: "200px",
 
@@ -97,6 +117,7 @@ class Register extends Component {
             {...this.props}
           />
           <label htmlFor="password">Password</label>
+          <span className="red-text">{errors.password}</span>
 
           <input
             onChange={this.onChange}
@@ -105,6 +126,9 @@ class Register extends Component {
             type="password"
             name="signup"
             id="password"
+            className={classnames("", {
+              invalid: errors.password
+            })}
             css={{
               width: "200px",
 
@@ -116,6 +140,7 @@ class Register extends Component {
             {...this.props}
           />
           <label htmlFor="password2">Confirm password</label>
+          <span className="red-text">{errors.password2}</span>
 
           <input
             onChange={this.onChange}
@@ -124,6 +149,9 @@ class Register extends Component {
             type="password"
             name="signup"
             id="password2"
+            className={classnames("", {
+              invalid: errors.password2
+            })}
             css={{
               width: "200px",
 
@@ -141,4 +169,18 @@ class Register extends Component {
   }
 }
 
-export default Register;
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));
