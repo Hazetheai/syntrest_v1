@@ -12,7 +12,7 @@ import { CardNav as Nav } from "./components/nav/CardNav";
 import { Comment } from "./components/cards/Comment";
 import CardImg from "./components/cards/CardImage";
 import SoloCard from "./components/cards/Card";
-import Home from "./components/layouts/Home";
+import Home from "./components/home/Home";
 import Landing from "./components/layouts/Landing";
 
 import MainNav from "./components/nav/MainNav";
