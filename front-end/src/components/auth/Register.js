@@ -67,9 +67,9 @@ class Register extends Component {
         }}
       >
         <div>
-          <Button text="Back to home">
-            <Link to="/" />
-          </Button>
+          <Link to="/">
+            <Button text="Back to home" />
+          </Link>
           <h2>Sign up!</h2>
           <h3>Delicious data... Nom nom nom.</h3>
           <p>
