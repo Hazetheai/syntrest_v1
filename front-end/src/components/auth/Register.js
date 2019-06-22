@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
-import { jsx } from "@emotion/core";
 
+import { jsx } from "@emotion/core";
 import { Button } from "../buttons/Button";
 
 class Register extends Component {
@@ -33,7 +33,9 @@ class Register extends Component {
   // Update to getDerivedStateFromProps once functionality is established
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.setState({
+        errors: nextProps.errors
+      });
     }
   }
 
@@ -63,7 +65,6 @@ class Register extends Component {
           flexDirection: "column",
           alignItems: "center"
         }}
-        {...this.props}
       >
         <div>
           <Button text="Back to home">
@@ -97,7 +98,6 @@ class Register extends Component {
               margin: "5px",
               borderRadius: "5px"
             }}
-            {...this.props}
           />
           <label htmlFor="email">Email</label>
           <span className="red-text">{errors.email}</span>
@@ -122,7 +122,6 @@ class Register extends Component {
               margin: "5px",
               borderRadius: "5px"
             }}
-            {...this.props}
           />
           <label htmlFor="password">Password</label>
           <span className="red-text">{errors.password}</span>
@@ -145,7 +144,6 @@ class Register extends Component {
               margin: "5px",
               borderRadius: "5px"
             }}
-            {...this.props}
           />
           <label htmlFor="password2">Confirm password</label>
           <span className="red-text">{errors.password2}</span>
@@ -168,7 +166,6 @@ class Register extends Component {
               margin: "5px",
               borderRadius: "5px"
             }}
-            {...this.props}
           />
           <Button type="submit" text="Sign up" />
         </form>

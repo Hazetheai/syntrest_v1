@@ -6,51 +6,46 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
-import { jsx } from "@emotion/core";
 
+import { jsx } from "@emotion/core";
 import { Button } from "../buttons/Button";
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
-      name: "",
       email: "",
+      password: "",
       errors: {}
     };
+
+    // this.onChange = this.onChange.bind(this);
+    // this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("./Home"); // push user to dashboard when they login
+      this.props.history.push("/home"); // push user to home when they login
     }
-
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
       });
     }
   }
-
-  componentDidMount() {
-    // If logged in and user navigates to Login page, should redirect them to dashboard
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/home");
-    }
-  }
-
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
-
   onSubmit = e => {
     e.preventDefault();
-
     const userData = {
       email: this.state.email,
       password: this.state.password
     };
+    console.log(this.props.loginUser(userData));
+    console.log(userData);
+
     this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
   };
 
@@ -63,11 +58,10 @@ class Login extends Component {
           flexDirection: "column",
           alignItems: "center"
         }}
-        {...this.props}
       >
-        <Button text="Back to home">
-          <Link to="/" />
-        </Button>
+        <Link to="/">
+          <Button text="Back to home" />
+        </Link>
         <p>
           Don't have an account? <Link to="/register">Register</Link>
         </p>
@@ -75,10 +69,10 @@ class Login extends Component {
 
         <form noValidate onSubmit={this.onSubmit}>
           <label htmlFor="email">Email</label>
-          <span className="red-text">
+          {/* <span className="red-text">
             {errors.email}
             {errors.emailnotfound}
-          </span>
+          </span> */}
           <input
             onChange={this.onChange}
             value={this.state.email}
@@ -98,13 +92,12 @@ class Login extends Component {
               margin: "5px",
               borderRadius: "5px"
             }}
-            {...this.props}
           />
           <label htmlFor="password">Password</label>
-          <span className="red-text">
+          {/* <span className="red-text">
             {errors.password}
             {errors.passwordincorrect}
-          </span>
+          </span> */}
 
           <input
             onChange={this.onChange}
@@ -123,9 +116,8 @@ class Login extends Component {
               margin: "5px",
               borderRadius: "5px"
             }}
-            {...this.props}
           />
-          <Button text="Login" />
+          <Button type="submit" text="Login" />
         </form>
       </div>
     );
