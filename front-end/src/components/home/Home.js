@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
@@ -28,7 +28,7 @@ class Home extends Component {
           }}
           className="masonry-container"
         >
-          {/* <b>Hey there,</b> {user.name.split(" ")[0]} */}
+          {/* <b>Hey there,</b> {user.name.split(" ")} */}
           <Button text="Logout" onClick={this.onLogoutClick} />
           <div
             className="masonry"
@@ -37,7 +37,6 @@ class Home extends Component {
               flexFlow: "row wrap",
               width: "100%"
             }}
-            {...this.props}
           >
             <Brick />
             <Brick />
