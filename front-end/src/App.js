@@ -1,33 +1,33 @@
-import React from "react";
-import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./store";
 import jwt_decode from "jwt-decode";
-import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
-
-import { ShareBtn } from "./components/buttons/ShareBtn";
-import { SaveBtn } from "./components/buttons/SaveBtn";
-import { MoreBtn } from "./components/buttons/MoreBtn";
-import HomeBtn from "./components/buttons/HomeBtn";
-import { CardNav as Nav } from "./components/nav/CardNav";
-import { Comment } from "./components/cards/Comment";
-import CardImg from "./components/cards/CardImage";
-import SoloCard from "./components/cards/Card";
-import Home from "./components/home/Home";
-import Landing from "./components/layouts/Landing";
-
-import MainNav from "./components/nav/MainNav";
-import Header from "./components/header/Header";
-import Search from "./components/header/Search";
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { logoutUser, setCurrentUser } from "./actions/authActions";
+import "./App.css";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import HomeBtn from "./components/buttons/HomeBtn";
+import { MoreBtn } from "./components/buttons/MoreBtn";
+import { SaveBtn } from "./components/buttons/SaveBtn";
+import { ShareBtn } from "./components/buttons/ShareBtn";
+import SoloCard from "./components/cards/Card";
+import CardImg from "./components/cards/CardImage";
+import { Comment } from "./components/cards/Comment";
+import Header from "./components/header/Header";
+import Search from "./components/header/Search";
+import Home from "./components/home/Home";
+import Landing from "./components/layouts/Landing";
+import { CardNav as Nav } from "./components/nav/CardNav";
+import { MainNav } from "./components/nav/MainNav";
 import PrivateRoute from "./components/private-routes/PrivateRoute";
+import ProfilePage from "./components/profilePage/ProfilePage";
+import store from "./store";
+import setAuthToken from "./utils/setAuthToken";
+
 // Check for token to keep user logged in
-if (localStorage.jwtToken) {
+if (localStorage.synJwtToken) {
   // Set auth token header auth
-  const token = localStorage.jwtToken;
+  const token = localStorage.synJwtToken;
   setAuthToken(token);
   // Decode token and get user info and exp
   const decoded = jwt_decode(token);
@@ -57,10 +57,12 @@ function App() {
           <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/home" component={Home} />
+
           <Switch>
-            <PrivateRoute exact path="/home" component={Home} />
+            <PrivateRoute exact path="/profile" component={ProfilePage} />
           </Switch>
-          <Home />
+
           <SoloCard>
             <Nav>
               <MoreBtn text="More" />
