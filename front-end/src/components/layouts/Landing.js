@@ -1,11 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Component } from "react";
-import { Link } from "react-router-dom";
-
-import Header from "../header/Header";
 import Login from "../auth/Login";
-import Register from "../auth/Register";
+import Header from "../header/Header";
 
 export default class Landing extends Component {
   render() {
@@ -22,10 +19,7 @@ export default class Landing extends Component {
             alignItems: "center"
           }}
         >
-          <Link to="/login">Login</Link>
           <Login />
-          <Link to="/register">Register</Link>
-          <Register />
         </section>
       </div>
     );

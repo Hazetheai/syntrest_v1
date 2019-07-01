@@ -31,7 +31,7 @@ export default function HomeBtn(props) {
       }}
       {...props}
     >
-      <Link to="/">
+      <Link to="/home">
         <img
           src={logo}
           alt="Syntrest Logo"

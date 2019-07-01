@@ -1,13 +1,12 @@
 /** @jsx jsx */
 
-import { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
-import classnames from "classnames";
-
 import { jsx } from "@emotion/core";
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { loginUser } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
 
 class Login extends Component {
@@ -25,15 +24,16 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    console.log("Mounted", this.props);
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/profile");
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/home"); // push user to home when they login
+      this.props.history.push("/profile"); // push user to profile when they login
     }
     if (nextProps.errors) {
       this.setState({
@@ -50,8 +50,6 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    console.log(this.props.loginUser(userData));
-    console.log(userData);
 
     this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
   };
@@ -66,12 +64,22 @@ class Login extends Component {
           alignItems: "center"
         }}
       >
-        <Link to="/">
-          <Button text="Back to home" />
-        </Link>
-        <p>
-          Don't have an account? <Link to="/register">Register</Link>
-        </p>
+        <div
+          css={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
+        >
+          <Link to="/home">
+            <Button text="Back to home" />
+          </Link>
+          <p>Don't have an account? </p>
+          <Link to="/register">
+            <Button text="Register"> </Button>
+          </Link>
+        </div>
+
         <h2>Login</h2>
 
         <form noValidate onSubmit={this.onSubmit}>

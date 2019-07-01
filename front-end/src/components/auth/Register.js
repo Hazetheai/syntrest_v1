@@ -1,13 +1,12 @@
 /** @jsx jsx */
 
-import { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { registerUser } from "../../actions/authActions";
-import classnames from "classnames";
-
 import { jsx } from "@emotion/core";
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import { Component } from "react";
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
+import { registerUser } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
 
 class Register extends Component {
@@ -67,14 +66,23 @@ class Register extends Component {
         }}
       >
         <div>
-          <Link to="/">
-            <Button text="Back to home" />
-          </Link>
+          <div
+            css={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
+          >
+            <Link to="/home">
+              <Button text="Back to home" />
+            </Link>
+            <p>Already have an account? </p>
+            <Link to="/login">
+              <Button text="Login"> </Button>
+            </Link>
+          </div>
           <h2>Sign up!</h2>
           <h3>Delicious data... Nom nom nom.</h3>
-          <p>
-            Already have an account? <Link to="/login">Log in</Link>
-          </p>
         </div>
         <form noValidate onSubmit={this.onSubmit}>
           <label htmlFor="name">Name</label>
