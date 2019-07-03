@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
 
+const emailRouter = require("./routes/controllers/email.restRouter");
+
 const users = require("./routes/api/users");
 
 const app = express();
@@ -34,6 +36,8 @@ require("./config/passport")(passport);
 // Routes
 
 app.use("/api/users", users);
+
+app.use("/reset_password", emailRouter);
 
 const port = 5000;
 
