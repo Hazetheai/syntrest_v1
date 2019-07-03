@@ -133,6 +133,10 @@ class Login extends Component {
             }}
           />
           <Button type="submit" text="Login" />
+
+          <Link to="/password/recover">
+            <p>Forgot your password? </p>
+          </Link>
         </form>
       </div>
     );

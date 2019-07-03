@@ -19,6 +19,8 @@ import Home from "./components/home/Home";
 import Landing from "./components/layouts/Landing";
 import { CardNav as Nav } from "./components/nav/CardNav";
 import { MainNav } from "./components/nav/MainNav";
+import RecoverPassword from "./components/PasswordReset/RecoverPassword";
+import UpdatePassword from "./components/PasswordReset/UpdatePassword";
 import PrivateRoute from "./components/private-routes/PrivateRoute";
 import ProfilePage from "./components/profilePage/ProfilePage";
 import store from "./store";
@@ -58,6 +60,16 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/home" component={Home} />
+          <Route exact path="/password/recover" component={RecoverPassword} />
+          <Route
+            path="/update-password"
+            render={({ match }) => (
+              <UpdatePassword
+                userId={match.params.userId}
+                token={match.params.token}
+              />
+            )}
+          />
 
           <Switch>
             <PrivateRoute exact path="/profile" component={ProfilePage} />
