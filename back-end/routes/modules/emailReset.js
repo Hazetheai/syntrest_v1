@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-export const transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.EMAIL_LOGIN,
@@ -8,15 +8,17 @@ export const transporter = nodemailer.createTransport({
   }
 });
 
-export const getPasswordResetURL = (user, token) =>
+console.log(transporter);
+
+const getPasswordResetURL = (user, token) =>
   `http://localhost:5000/password/reset/${user._id}/${token}`;
 
-export const resetPasswordTemplate = (user, url) => {
+const resetPasswordTemplate = (user, url) => {
   const from = process.env.EMAIL_LOGIN;
   const to = user.email;
   const subject = "🌻 Syntrest Password Reset 🌻";
   const html = `
-  <p>Hey ${user.displayName || user.email},</p>
+  <p>Hey ${user || user.email},</p>
   <p>We heard that you lost your Syntrest password. Sorry about that!</p>
   <p>But don’t worry! You can use the following link to reset your password:</p>
   <a href=${url}>${url}</a>
@@ -26,4 +28,10 @@ export const resetPasswordTemplate = (user, url) => {
   `;
 
   return { from, to, subject, html };
+};
+
+module.exports = {
+  transporter,
+  getPasswordResetURL,
+  resetPasswordTemplate
 };
