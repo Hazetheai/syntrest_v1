@@ -2,3 +2,5 @@
 node_modules
 /front-end/node_modules
 .env
+config/keys.js
+back-end/config/keys.js
