@@ -62,7 +62,7 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route exact path="/password/recover" component={RecoverPassword} />
           <Route
-            path="/update-password"
+            path="/update-password/:userId/:token"
             render={({ match }) => (
               <UpdatePassword
                 userId={match.params.userId}
