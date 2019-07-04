@@ -69,6 +69,7 @@ const receiveNewPassword = (req, res) => {
           bcrypt.hash(password, salt, function(err, hash) {
             // Call error handler:
             if (err) return;
+            // **TODO** DEPRECEATED CALL
             User.findOneAndUpdate({ _id: userId }, { password: hash })
               .then(() => res.status(202).json("Password successfully changed"))
               .catch(err => res.status(500).json(err));
