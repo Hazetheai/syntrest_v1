@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../buttons/Button";
-const SERVER_URI = "localhost:5000";
+// const SERVER_URI = "localhost:5000";
 class UpdatePassword extends Component {
   state = {
     password: "",
@@ -21,15 +21,16 @@ class UpdatePassword extends Component {
     const { userId, token } = this.props;
     const { password } = this.state;
     axios
-      .post(
-        `${SERVER_URI}/reset_password/receive_new_password/${userId}/${token}`,
-        { password }
-      )
+      .post(`/reset_password/receive_new_password/${userId}/${token}`, {
+        password
+      })
       .then(res => console.log("RESPONSE FROM SERVER TO CLIENT:", res))
       .catch(err => console.log("SERVER ERROR TO CLIENT:", err));
     this.setState({ submitted: !this.state.submitted });
   };
   render() {
+    console.log("props", this.props);
+
     const { submitted } = this.state;
     return (
       <div>
