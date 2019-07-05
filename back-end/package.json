@@ -13,6 +13,7 @@
   "author": "Jake Riordan",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.0",
@@ -23,6 +24,7 @@
     "mongoose": "^5.5.15",
     "nodemailer": "^6.2.1",
     "passport": "^0.4.0",
+    "passport-github": "^1.1.0",
     "passport-jwt": "^4.0.0",
     "validator": "^11.0.0"
   },
