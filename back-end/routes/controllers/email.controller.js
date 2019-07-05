@@ -43,9 +43,9 @@ const sendPasswordResetEmail = async (req, res) => {
     transporter.sendMail(emailTemplate, (err, info) => {
       if (err) {
         res.status(500).json("Error sending email %%@$@£");
-        console.log("Error is: ", err, "Info is: ", info);
+        // console.log("Error is: ", err, "Info is: ", info);
       }
-      console.log(`** Email Sent **`, info.response);
+      // console.log(`** Email Sent **`, info.response);
     });
   };
 
