@@ -8,8 +8,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-console.log(transporter);
-
 const getPasswordResetURL = (user, token) =>
   `http://localhost:3002/update-password/${user._id}/${token}`;
 

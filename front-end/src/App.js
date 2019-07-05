@@ -70,6 +70,7 @@ function App() {
               />
             )}
           />
+          {/* <Route path="auth/github/callback" component={Home} /> */}
 
           <Switch>
             <PrivateRoute exact path="/profile" component={ProfilePage} />
