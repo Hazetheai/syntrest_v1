@@ -133,20 +133,23 @@ class Login extends Component {
             }}
           />
           <Button type="submit" text="Login" />
-          <div>
-            {/* TODO ==> ADD An unguessable random string. It is used to protect against cross-site request forgery attacks. */}
-            <a
-              href={`https://github.com/login/oauth/authorize?client_id=${
-                process.env.REACT_APP_GITHUB_CLIENT_ID
-              }`}
-            >
-              GITHUB
-            </a>
-          </div>
+
           <Link to="/password/recover">
             <p>Forgot your password? </p>
           </Link>
         </form>
+        <div>
+          {/* TODO ==> ADD An unguessable random string. It is used to protect against cross-site request forgery attacks. */}
+          <a
+            href={`https://github.com/login/oauth/authorize?client_id=${
+              process.env.REACT_APP_GITHUB_CLIENT_ID
+            }`}
+          >
+            <Button text="Github" onSubmit={this.sendRequest}>
+              {" "}
+            </Button>
+          </a>
+        </div>
       </div>
     );
   }
