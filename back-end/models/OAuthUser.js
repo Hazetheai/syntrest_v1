@@ -23,6 +23,10 @@ const UserSchema = new Schema({
   platform: {
     type: String,
     required: true
+  },
+  id: {
+    type: Number,
+    required: true
   }
 });
 
