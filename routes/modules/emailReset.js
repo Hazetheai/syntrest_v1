@@ -9,14 +9,14 @@ const transporter = nodemailer.createTransport({
 });
 
 const getPasswordResetURL = (user, token) =>
-  `http://localhost:3002/update-password/${user._id}/${token}`;
+  `${process.env.CLIENT_URI}/${user._id}/${token}`;
 
 const resetPasswordTemplate = (user, url) => {
   const from = process.env.EMAIL_LOGIN;
   const to = user.email;
   const subject = "🌻 Syntrest Password Reset 🌻";
   const html = `
-  <p>Hey ${user || user.email},</p>
+  <p>Hey ${user.name || user.email},</p>
   <p>We heard that you lost your Syntrest password. Sorry about that!</p>
   <p>But don’t worry! You can use the following link to reset your password:</p>
   <a href=${url}>${url}</a>
