@@ -4,9 +4,9 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { logoutUser, setCurrentUser } from "./actions/authActions";
 import "./App.css";
+import Loading from "./components/auth/Loading";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-import HomeBtn from "./components/buttons/HomeBtn";
 import { MoreBtn } from "./components/buttons/MoreBtn";
 import { SaveBtn } from "./components/buttons/SaveBtn";
 import { ShareBtn } from "./components/buttons/ShareBtn";
@@ -14,11 +14,9 @@ import SoloCard from "./components/cards/Card";
 import CardImg from "./components/cards/CardImage";
 import { Comment } from "./components/cards/Comment";
 import Header from "./components/header/Header";
-import Search from "./components/header/Search";
 import Home from "./components/home/Home";
 import Landing from "./components/layouts/Landing";
 import { CardNav as Nav } from "./components/nav/CardNav";
-import { MainNav } from "./components/nav/MainNav";
 import RecoverPassword from "./components/PasswordReset/RecoverPassword";
 import UpdatePassword from "./components/PasswordReset/UpdatePassword";
 import PrivateRoute from "./components/private-routes/PrivateRoute";
@@ -33,8 +31,10 @@ if (localStorage.synJwtToken) {
   setAuthToken(token);
   // Decode token and get user info and exp
   const decoded = jwt_decode(token);
+  console.log("decoded", decoded);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
+  // console.log("token on app homepage", token);
   // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
@@ -44,18 +44,14 @@ if (localStorage.synJwtToken) {
     window.location.href = "./login";
   }
 }
-
 function App() {
   return (
     <Provider store={store}>
       <Router>
         {" "}
         <div className="App">
-          <Header>
-            <HomeBtn />
-            <Search />
-            <MainNav />
-          </Header>
+          <Header />
+
           <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
@@ -70,8 +66,12 @@ function App() {
               />
             )}
           />
-          {/* <Route path="auth/github/callback" component={Home} /> */}
-
+          <Route
+            path="/auth/github/callback/:accessToken"
+            render={({ match }) => (
+              <Loading accessToken={match.params.accessToken} />
+            )}
+          />
           <Switch>
             <PrivateRoute exact path="/profile" component={ProfilePage} />
           </Switch>
