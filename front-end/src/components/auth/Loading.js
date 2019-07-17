@@ -1,11 +1,13 @@
 /** @jsx jsx */
 
 import { jsx } from "@emotion/core";
-import axios from "axios";
 import PropTypes from "prop-types";
 import { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { loginOAuth } from "../../actions/OAuthActions";
 
-class Login extends Component {
+class Loading extends Component {
   constructor() {
     super();
 
@@ -15,26 +17,31 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    axios.post("/getjwt/token", { token: this.props.accessToken }).then(res => {
-      const { token } = res.data;
-      console.log("token", token);
-      localStorage.setItem("synJwtToken", token);
-      console.log("Mounting");
-      this.setState({ loading: false });
-    });
+    this.props.loginOAuth(this.props.accessToken);
+    // If logged in and user navigates to Login page, should redirect them to dashboard
+    if (this.props.auth.isAuthenticated && this.props.history) {
+      this.props.history.push("/profile");
+    }
+    console.log("this.props.history", this.props.history);
   }
 
-  //   componentWillReceiveProps(nextProps) {
-  //       // push user to profile when they login
-  //       if (nextProps.auth.isAuthenticated) {
-  //         this.props.history.push("/profile");
-  //     }
-  //     if (nextProps.errors) {
-  //       this.setState({
-  //         errors: nextProps.errors
-  //       });
-  //     }
-  //   }
+  componentWillReceiveProps(nextProps) {
+    console.log("nextProps", nextProps);
+    console.log("this.props", this.props);
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/profile"); // push user to profile when they login
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
+
+  onSubmit = e => {
+    e.preventDefault();
+    this.props.loginOAuth(this.props.accessToken);
+  };
 
   render() {
     return (
@@ -46,12 +53,25 @@ class Login extends Component {
         }}
       >
         <h2>Loading</h2>
+        <button onClick={this.onSubmit}>Continue</button>
       </div>
     );
   }
 }
 
-Login.propTypes = {
-  accessToken: PropTypes.string.isRequired
+Loading.propTypes = {
+  accessToken: PropTypes.string.isRequired,
+  loginOAuth: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
-export default Login;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { loginOAuth }
+  )(Loading)
+);
