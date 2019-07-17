@@ -19,7 +19,7 @@ export const Button = props => (
       position: "relative",
       fontSize: "1.6rem",
       "&:hover": {
-        boxShadow: "0 .5px 1px rgba(17, 17, 17, 0.2)",
+        boxShadow: "0 1px 1px rgba(17, 17, 17, 0.2)",
         "&::after": {
           transform: "scaleX(1.4)",
           opacity: 0

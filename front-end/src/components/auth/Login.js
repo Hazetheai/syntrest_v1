@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
+import GithubBtn from "../buttons/GithubBtn";
 
 class Login extends Component {
   constructor() {
@@ -145,7 +146,9 @@ class Login extends Component {
               process.env.REACT_APP_GITHUB_CLIENT_ID
             }`}
           >
-            <Button text="Github"> </Button>
+            <GithubBtn text="Github">
+              <i class="fab fa-github" />{" "}
+            </GithubBtn>
           </a>
         </div>
       </div>
