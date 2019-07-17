@@ -24,7 +24,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    console.log("Mounted", this.props);
+    // console.log("Mounted", this.props);
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated && this.props.history) {
       this.props.history.push("/profile");
@@ -32,7 +32,7 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
+    if (nextProps.auth.isAuthenticated || this.props.auth.isAuthenticated) {
       this.props.history.push("/profile"); // push user to profile when they login
     }
     if (nextProps.errors) {
@@ -50,8 +50,8 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-
-    this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+    // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+    this.props.loginUser(userData);
   };
 
   render() {
@@ -145,9 +145,7 @@ class Login extends Component {
               process.env.REACT_APP_GITHUB_CLIENT_ID
             }`}
           >
-            <Button text="Github" onSubmit={this.sendRequest}>
-              {" "}
-            </Button>
+            <Button text="Github"> </Button>
           </a>
         </div>
       </div>

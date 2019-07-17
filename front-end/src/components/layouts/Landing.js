@@ -2,14 +2,11 @@
 import { jsx } from "@emotion/core";
 import { Component } from "react";
 import Login from "../auth/Login";
-import Header from "../header/Header";
 
 export default class Landing extends Component {
   render() {
     return (
       <div>
-        <Header />
-
         <section
           className="signupOrLogin"
           css={{

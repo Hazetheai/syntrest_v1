@@ -22,8 +22,8 @@ class ProfilePage extends Component {
 
   render() {
     const { user } = this.props.auth;
-    console.log("User", user);
-    console.log("this.props.auth", this.props.auth);
+    // console.log("User", user);
+    // console.log("this.props.auth", this.props.auth);
     return (
       <div>
         <section
