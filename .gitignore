@@ -56,3 +56,7 @@ yarn-error.log*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+#media
+raw_images

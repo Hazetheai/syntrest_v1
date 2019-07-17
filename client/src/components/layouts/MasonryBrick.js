@@ -34,7 +34,7 @@ export const MasonryBrick = () => {
       >
         <img
           className="masonry-image"
-          src="https://source.unsplash.com/400x300/?synth/"
+          src="https://source.unsplash.com/400x300/collections/4861165"
           alt=""
           css={{
             objectFit: "cover",
