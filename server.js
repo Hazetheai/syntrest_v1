@@ -23,7 +23,7 @@ app.use(
 app.use(bodyParser.json());
 
 // DB Config
-const db = require("./config/keys").mongoURI;
+const db = require("./config/keys").mongoURI || process.env.MONGO_URI;
 
 // Connect to MongoDB
 mongoose
@@ -58,6 +58,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const port = process.env.Port || 5000;
+const PORT = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`All systems are on on port ${port}`));
+app.listen(PORT, () => console.log(`All systems are on on PORT ${PORT}`));
