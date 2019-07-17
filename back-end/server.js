@@ -8,7 +8,7 @@ const users = require("./routes/api/users");
 const { githubAuth } = require("./routes/api/githubAuth");
 const makeOauthJwt = require("./routes/modules/makeoAuthJwt");
 
-const { passCheck } = require("./config/passport");
+// const passCheck = require("./config/passport");
 
 const app = express();
 
@@ -34,7 +34,9 @@ mongoose
 app.use(passport.initialize());
 
 // Passport config
-passCheck(passport);
+// passCheck(passport);
+//
+require("./config/passport")(passport);
 
 // Routes
 // email login/register
@@ -44,7 +46,7 @@ app.use("/reset_password", emailRouter);
 // oAuth login/signup
 app.use("/login/github", githubAuth);
 // Get oAuth token to client
-app.use("/getjwt", makeOauthJwt);
+app.use("/oauthjwt", makeOauthJwt);
 
 const port = 5000;
 

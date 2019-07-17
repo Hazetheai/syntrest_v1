@@ -6,7 +6,7 @@
 // const opts = {};
 // opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 // opts.secretOrKey = keys.secretOrKey;
-// const passCheck = passport => {
+// module.exports = passport => {
 //   passport.use(
 //     new JwtStrategy(opts, (jwt_payload, done) => {
 //       User.findById(jwt_payload.id)
@@ -22,12 +22,10 @@
 //   );
 // };
 
-// module.exports = { passCheck };
-
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const mongoose = require("mongoose");
-// separate models for seoarate login methods
+// separate models for separate login methods
 const emailUser = mongoose.model("users");
 const oAuthUser = mongoose.model("oAuthusers");
 
@@ -37,9 +35,11 @@ const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = keys.secretOrKey;
 
-const passCheck = passport => {
+module.exports = passport => {
+  console.log("passport");
   passport.use(
     new JwtStrategy(opts, (jwt_payload, done) => {
+      console.log("jwt_payload", jwt_payload);
       emailUser
         .findById(jwt_payload.id)
         .then(user => {
@@ -47,7 +47,7 @@ const passCheck = passport => {
             console.log("authorised email");
             return done(null, user);
           } else {
-            return passport.use(
+            passport.use(
               new JwtStrategy(opts, (jwt_payload, done) => {
                 oAuthUser
                   .findById(jwt_payload.id)
@@ -67,5 +67,3 @@ const passCheck = passport => {
     })
   );
 };
-
-module.exports = { passCheck };
