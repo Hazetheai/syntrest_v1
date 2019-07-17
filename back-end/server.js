@@ -38,10 +38,6 @@ app.use(passport.initialize());
 //
 require("./config/passport")(passport);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("../front-end/build"));
-}
-
 // Routes
 // email login/register
 app.use("/api/users", users);
@@ -51,6 +47,12 @@ app.use("/reset_password", emailRouter);
 app.use("/login/github", githubAuth);
 // Get oAuth token to client
 app.use("/oauthjwt", makeOauthJwt);
+
+// Serve Static Assets
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("../front-end/build"));
+}
 
 const port = process.env.Port || 5000;
 
