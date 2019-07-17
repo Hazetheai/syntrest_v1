@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const path = require("path");
 
 const emailRouter = require("./routes/controllers/email.restRouter");
 const users = require("./routes/api/users");
@@ -52,6 +53,9 @@ app.use("/oauthjwt", makeOauthJwt);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("../front-end/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname));
+  });
 }
 
 const port = process.env.Port || 5000;
