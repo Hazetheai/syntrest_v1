@@ -38,6 +38,10 @@ app.use(passport.initialize());
 //
 require("./config/passport")(passport);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("../front-end/build"));
+}
+
 // Routes
 // email login/register
 app.use("/api/users", users);
@@ -48,6 +52,6 @@ app.use("/login/github", githubAuth);
 // Get oAuth token to client
 app.use("/oauthjwt", makeOauthJwt);
 
-const port = 5000;
+const port = process.env.Port || 5000;
 
 app.listen(port, () => console.log(`All systems are on on port ${port}`));
