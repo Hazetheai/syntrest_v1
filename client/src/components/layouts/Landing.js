@@ -3,6 +3,7 @@ import { jsx } from "@emotion/core";
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../buttons/Button";
+import Keyboard from "../synth/Keyboard";
 
 export default class Landing extends Component {
   render() {
@@ -19,11 +20,18 @@ export default class Landing extends Component {
             textAlign: "center"
           }}
         >
-          <h4>SYNTREST</h4>
-          <p>Where do you want to go?</p>
+          <h1 className="headingPrimary">SYNTREST</h1>
+          <p>
+            Welcome! We're afraid that nothing's ready yet, <br />
+            so why not have a noodle on the keyboard while you wait!
+          </p>
           <br />
-          <div>
-            <h3>New Here?</h3>
+          <div
+            css={{
+              marginBottom: "4rem"
+            }}
+          >
+            <h3 className="headingTertiary">New Here?</h3>
             <Link
               to="/register"
               css={{
@@ -35,17 +43,14 @@ export default class Landing extends Component {
               <Button text="Register" />
             </Link>
           </div>
-          <div>
-            {/* <Link
-              to="/login"
-              css={{
-                width: "140px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px"
-              }}
-            >
-              Log In
-            </Link> */}
+          <div
+            className="synth"
+            css={{
+              backgroundColor: "white",
+              borderRadius: "5px"
+            }}
+          >
+            <Keyboard />
           </div>
         </section>
       </div>
