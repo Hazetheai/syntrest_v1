@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
-import { MasonryBrick as Brick } from "../layouts/MasonryBrick";
+import Masonry from "../layouts/Masonry";
 
 class Home extends Component {
   onLogoutClick = e => {
@@ -22,28 +22,28 @@ class Home extends Component {
     // console.log("User", user);
     // console.log("this.props.auth", this.props.auth);
     return (
-      <div
-        css={{
-          backgroundColor: "$color-grey-light-1",
-          display: "flex",
-          justifyContent: "center"
-        }}
-      >
+      <div>
         {/* Needs to be moved to MainNav */}
-        {this.props.auth.isAuthenticated ? (
-          <Fragment>
-            <b>Hey there,</b> {user.name}
-            <Button
-              text="Logout"
-              onClick={this.onLogoutClick}
-              css={{ maxHeight: 36 }}
-            />
-          </Fragment>
-        ) : (
-          <Link to="/login">
-            <Button text="Login" />
-          </Link>
-        )}
+        <div
+          css={{
+            display: "block"
+          }}
+        >
+          {this.props.auth.isAuthenticated ? (
+            <Fragment>
+              <b>Hey there,</b> {user.name}
+              <Button
+                text="Logout"
+                onClick={this.onLogoutClick}
+                css={{ maxHeight: 36 }}
+              />
+            </Fragment>
+          ) : (
+            <Link to="/login">
+              <Button text="Login" />
+            </Link>
+          )}
+        </div>
         <section
           css={{
             backgroundColor: "$color-grey-light-1",
@@ -64,11 +64,11 @@ class Home extends Component {
               width: "100%"
             }}
           >
-            <Brick />
-            <Brick />
-            <Brick />
-            <Brick />
-            <Brick />
+            <Masonry />
+            <Masonry />
+            <Masonry />
+            <Masonry />
+            <Masonry />
           </div>
         </section>
       </div>
