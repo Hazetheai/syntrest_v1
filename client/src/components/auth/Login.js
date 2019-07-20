@@ -62,13 +62,20 @@ class Login extends Component {
         css={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "center",
+          width: "25rem",
+          backgroundColor: "#fff",
+          margin: "auto",
+          marginTop: "4rem",
+          padding: "3rem",
+          borderRadius: "5px"
         }}
       >
         <div
           css={{
             display: "flex",
             flexDirection: "column",
+            justifyContent: "center",
             alignItems: "center"
           }}
         >
@@ -83,12 +90,22 @@ class Login extends Component {
 
         <h2>Login</h2>
 
-        <form noValidate onSubmit={this.onSubmit}>
+        <form
+          noValidate
+          onSubmit={this.onSubmit}
+          css={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "2rem"
+          }}
+        >
           <label htmlFor="email">Email</label>
-          {/* <span className="red-text">
+          <span className="red-text">
             {errors.email}
             {errors.emailnotfound}
-          </span> */}
+          </span>
           <input
             onChange={this.onChange}
             value={this.state.email}
@@ -110,10 +127,10 @@ class Login extends Component {
             }}
           />
           <label htmlFor="password">Password</label>
-          {/* <span className="red-text">
+          <span className="red-text">
             {errors.password}
             {errors.passwordincorrect}
-          </span> */}
+          </span>
 
           <input
             onChange={this.onChange}

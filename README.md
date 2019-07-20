@@ -29,7 +29,7 @@ A few guest appearances from:
 
 ------------------------------------------------------------------------
 
-##Current features planned are as follows:
+## Current features planned are as follows:
 
 #### V1
 

@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { registerUser } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
+import GithubBtn from "../buttons/GithubBtn";
 
 class Register extends Component {
   constructor(props) {
@@ -62,10 +63,16 @@ class Register extends Component {
         css={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "center",
+          width: "25rem",
+          backgroundColor: "#fff",
+          margin: "auto",
+          marginTop: "4rem",
+          padding: "3rem",
+          borderRadius: "5px"
         }}
       >
-        <div>
+        <div css={{}}>
           <div
             css={{
               display: "flex",
@@ -84,7 +91,17 @@ class Register extends Component {
           <h2>Sign up!</h2>
           <h3>Delicious data... Nom nom nom.</h3>
         </div>
-        <form noValidate onSubmit={this.onSubmit}>
+        <form
+          noValidate
+          onSubmit={this.onSubmit}
+          css={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            margin: "2rem"
+          }}
+        >
           <label htmlFor="name">Name</label>
           <span className="red-text">{errors.name}</span>
 
@@ -177,6 +194,15 @@ class Register extends Component {
           />
           <Button type="submit" text="Sign up" />
         </form>
+        <a
+          href={`https://github.com/login/oauth/authorize?client_id=${
+            process.env.REACT_APP_GITHUB_CLIENT_ID
+          }`}
+        >
+          <GithubBtn text="Github">
+            <i class="fab fa-github" />{" "}
+          </GithubBtn>
+        </a>
       </div>
     );
   }

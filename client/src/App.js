@@ -1,3 +1,6 @@
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
+
 import jwt_decode from "jwt-decode";
 import React from "react";
 import { Provider } from "react-redux";
@@ -34,7 +37,6 @@ if (localStorage.synJwtToken) {
   console.log("decoded", decoded);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-  // console.log("token on app homepage", token);
   // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
@@ -49,7 +51,13 @@ function App() {
     <Provider store={store}>
       <Router>
         {" "}
-        <div className="App">
+        <div
+          className="App"
+          css={{
+            backgroundColor: "#342a33",
+            minHeight: "100vh"
+          }}
+        >
           <Header />
 
           <Route exact path="/" component={Landing} />
@@ -76,7 +84,7 @@ function App() {
             <PrivateRoute exact path="/profile" component={ProfilePage} />
           </Switch>
 
-          <SoloCard>
+          {/* <SoloCard>
             <Nav>
               <MoreBtn text="More" />
               <ShareBtn text="Share" />
@@ -84,7 +92,7 @@ function App() {
             </Nav>
             <CardImg />
             <Comment />
-          </SoloCard>
+          </SoloCard> */}
         </div>
       </Router>
     </Provider>
