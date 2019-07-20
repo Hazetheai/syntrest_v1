@@ -15,18 +15,6 @@ export const MasonryBrick = () => {
           overflow: "hidden",
           boxShadow: "$box-shadow",
 
-          "&:nth-child(4n + 1)": {
-            width: "250px"
-          },
-          "&:nth-child(4n + 1):nth-child(4n + 2)": {
-            width: "325px"
-          },
-          "&:nth-child(4n + 1):nth-child(4n + 3)": {
-            width: "180px"
-          },
-          "&:nth-child(4n + 1):nth-child(4n + 4)": {
-            width: "380px"
-          },
           "&:hover": {
             opacity: "0.7"
           }
@@ -34,7 +22,7 @@ export const MasonryBrick = () => {
       >
         <img
           className="masonry-image"
-          src="https://source.unsplash.com/400x300/collections/4861165"
+          src="https://source.unsplash.com/400x300/?=keyboard"
           alt=""
           css={{
             objectFit: "cover",
