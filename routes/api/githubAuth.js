@@ -38,7 +38,9 @@ const githubAuth = app.get("/callback", (req, res, next) => {
             res.redirect(`${CLIENT_URI}/auth/github/callback/${accessToken}`);
             return result.data;
           })
-          .catch(err => console.log(err));
+          .catch(err =>
+            console.log("Error generating user from accesstoken", err)
+          );
       })
       // authenticate user if in db; else make user from data
       .then(ghuser => {

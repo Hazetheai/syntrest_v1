@@ -24,11 +24,11 @@ const key = css({
 });
 
 // TODO
-const pressed = css({
-  transformOrigin: "top",
-  transform: "scaleY(.96)",
-  boxShadow: "inset 0px 1px 2px #666"
-});
+// const pressed = css({
+//   transformOrigin: "top",
+//   transform: "scaleY(.96)",
+//   boxShadow: "inset 0px 1px 2px #666"
+// });
 
 const blackKey = css({
   position: "absolute",
@@ -91,20 +91,19 @@ const Keyboard = () => {
       })
     );
 
-    window.addEventListener(
-      "keydown",
-      (onkeydown = e => {
-        synth.triggerAttack(keyToPitch[e.key], Tone.context.currentTime);
-        css = { pressed };
-      })
-    );
+    // window.addEventListener(
+    //   "keydown",
+    //   (onkeydown = e => {
+    //     synth.triggerAttack(keyToPitch[e.key], Tone.context.currentTime);
+    //   })
+    // );
 
-    window.addEventListener(
-      "keyup",
-      (onkeyup = e => {
-        synth.triggerRelease();
-      })
-    );
+    // window.addEventListener(
+    //   "keyup",
+    //   (onkeyup = e => {
+    //     synth.triggerRelease();
+    //   })
+    // );
   }, [keyToPitch, synth]);
 
   return (
