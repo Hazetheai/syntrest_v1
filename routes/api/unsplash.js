@@ -12,10 +12,23 @@ const unsplash = new Unsplash({
   callbackUrl: process.env.UNSPLASH_CALLBACK_URL
 });
 
-module.exports = app.get("/unsplash", (req, res) => {
+const random = app.get("/unsplash", (req, res) => {
   unsplash.photos
-    .listPhotos(1, 30)
+    .listPhotos(req.query.start, req.query.count)
     .then(toJson)
-    .then(json => res.json(json));
+    .then(json => {
+      return res.json(json);
+    });
 });
-console.log("beans");
+
+const synth = app.get("/unsplash/synth", (req, res) => {
+  unsplash.search
+    .photos("synth")
+    .then(toJson)
+    .then(json => {
+      return res.json(json);
+    })
+    .catch(console.error());
+});
+
+module.exports = { random, synth };
