@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
-import Masonry from "../layouts/Masonry";
+import Scroll from "../layouts/ScrollUnsp";
 
 class Home extends Component {
   onLogoutClick = e => {
@@ -55,21 +55,7 @@ class Home extends Component {
           }}
           className="masonry-container"
         >
-          <div
-            className="masonry"
-            css={{
-              display: "flex",
-              justifyContent: "center",
-              flexFlow: "row wrap",
-              width: "100%"
-            }}
-          >
-            <Masonry />
-            <Masonry />
-            <Masonry />
-            <Masonry />
-            <Masonry />
-          </div>
+          <Scroll />
         </section>
       </div>
     );
