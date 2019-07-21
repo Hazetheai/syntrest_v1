@@ -36,7 +36,7 @@ class ProfilePage extends Component {
         >
           {this.props.auth.isAuthenticated ? (
             <span>
-              <h3 className="headingSecondary">Hey there, {user.name}</h3>
+              <h3 className="headingTertiary">Hey there, {user.name}</h3>
             </span>
           ) : null}
           <Button text="Logout" onClick={this.onLogoutClick} />
