@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../../models/OAuthUser");
-const { currentUser } = require("../api/githubAuth");
+const { currentGithubUser } = require("../api/githubAuth");
+const { currentRedditUser } = require("../api/redditAuth");
 const express = require("express");
 const app = express.Router();
 const keys = require("../../config/keys");
@@ -19,10 +20,33 @@ function makeOauthJwt(user) {
   });
 }
 
-module.exports = app.post("/token", (req, res) => {
-  const user = currentUser.user;
-  const serverAccessToken = currentUser.accessToken;
+module.exports = app.post("/token/github", (req, res, next) => {
+  const user = currentGithubUser.user;
+  const serverAccessToken = currentGithubUser.accessToken;
   const clientAccessToken = req.body.token;
+
+  if (serverAccessToken === clientAccessToken) {
+    User.findOne({
+      id: user.id,
+      name: user.name
+    })
+      .then(user => {
+        const token = makeOauthJwt(user);
+
+        res.json({
+          success: true,
+          token: "Bearer " + token
+        });
+      })
+      .catch(err => console.log("Sending back to Client", err));
+  } else next();
+});
+
+app.post("/token/reddit", (req, res, next) => {
+  const user = currentRedditUser.user;
+  const serverAccessToken = currentRedditUser.accessToken;
+  const clientAccessToken = req.body.token;
+
   if (serverAccessToken === clientAccessToken) {
     User.findOne({
       id: user.id,
