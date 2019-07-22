@@ -12,6 +12,10 @@ const UserSchema = new Schema({
     type: String,
     required: false
   },
+  url: {
+    type: String,
+    required: false
+  },
   password: {
     type: String,
     required: true
