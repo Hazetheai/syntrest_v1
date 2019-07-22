@@ -5,7 +5,7 @@ const User = require("../../models/OAuthUser");
 
 const app = express.Router();
 
-let currentUser = {};
+let currentGithubUser = { platform: "github" };
 
 const { CLIENT_URI } = process.env;
 const { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } = process.env;
@@ -27,7 +27,7 @@ const githubAuth = app.get("/callback", (req, res, next) => {
       .then(response => {
         const accessToken = response.data.access_token;
         // pass to global variable to move to different file **Need Better Method**
-        currentUser.accessToken = accessToken;
+        currentGithubUser.accessToken = accessToken;
         return axios({
           method: "get",
           url: `https://api.github.com/user`,
@@ -49,7 +49,7 @@ const githubAuth = app.get("/callback", (req, res, next) => {
             if (user) {
               // return this and go straight to authentication ->via React Router verifying params
               //  Add to global variable to access in makeOAuthJwt
-              currentUser.user = user;
+              currentGithubUser.user = user;
 
               return "Already authenticated with Github";
             } else {
@@ -57,7 +57,7 @@ const githubAuth = app.get("/callback", (req, res, next) => {
                 email: ghuser.email,
                 name: ghuser.login,
                 password: ghuser.id,
-                platform: "Github",
+                platform: "github",
                 id: ghuser.id
               });
 
@@ -79,4 +79,4 @@ const githubAuth = app.get("/callback", (req, res, next) => {
     res.redirect(`${CLIENT_URI}/register`);
   }
 });
-module.exports = { githubAuth, currentUser };
+module.exports = { githubAuth, currentGithubUser };
