@@ -7,6 +7,7 @@ const path = require("path");
 const emailRouter = require("./routes/controllers/email.restRouter");
 const users = require("./routes/api/users");
 const { githubAuth } = require("./routes/api/githubAuth");
+const { redditAuth } = require("./routes/api/redditAuth");
 const makeOauthJwt = require("./routes/modules/makeoAuthJwt");
 const { random } = require("./routes/api/unsplash");
 
@@ -42,8 +43,11 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 // email password reset
 app.use("/reset_password", emailRouter);
-// oAuth login/signup
+// Github oAuth login/signup
 app.use("/login/github", githubAuth);
+// Reddit oAuth login/signup
+app.use("/login/reddit", redditAuth);
+
 // Get oAuth token to client
 app.use("/oauthjwt", makeOauthJwt);
 // Get Unsplash Photos
