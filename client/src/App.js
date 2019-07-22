@@ -74,9 +74,12 @@ function App() {
             )}
           />
           <Route
-            path="/auth/github/callback/:accessToken"
+            path="/auth/:platform/callback/:accessToken"
             render={({ match }) => (
-              <Loading accessToken={match.params.accessToken} />
+              <Loading
+                accessToken={match.params.accessToken}
+                platform={match.params.platform}
+              />
             )}
           />
           <Switch>
