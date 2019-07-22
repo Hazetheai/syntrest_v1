@@ -17,17 +17,14 @@ class Loading extends Component {
   }
 
   componentDidMount() {
-    this.props.loginOAuth(this.props.accessToken);
+    this.props.loginOAuth(this.props.accessToken, this.props.platform);
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated && this.props.history) {
       this.props.history.push("/profile");
     }
-    console.log("this.props.history", this.props.history);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("nextProps", nextProps);
-    console.log("this.props", this.props);
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/profile"); // push user to profile when they login
     }
@@ -60,6 +57,7 @@ class Loading extends Component {
 }
 
 Loading.propTypes = {
+  platform: PropTypes.string.isRequired,
   accessToken: PropTypes.string.isRequired,
   loginOAuth: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
