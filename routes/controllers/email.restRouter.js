@@ -1,8 +1,6 @@
 const express = require("express");
-
-const emailController = require("./email.controller");
-
 const emailRouter = express.Router();
+const emailController = require("./email.controller");
 
 emailRouter.route("/user/:email").post(emailController.sendPasswordResetEmail);
 

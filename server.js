@@ -7,9 +7,9 @@ const path = require("path");
 const emailRouter = require("./routes/controllers/email.restRouter");
 const users = require("./routes/api/users");
 const { githubAuth } = require("./routes/api/githubAuth");
+const { redditAuth } = require("./routes/api/redditAuth");
 const makeOauthJwt = require("./routes/modules/makeoAuthJwt");
-
-// const passCheck = require("./config/passport");
+const { random } = require("./routes/api/unsplash");
 
 const app = express();
 
@@ -35,8 +35,7 @@ mongoose
 app.use(passport.initialize());
 
 // Passport config
-// passCheck(passport);
-//
+
 require("./config/passport")(passport);
 
 // Routes
@@ -44,10 +43,15 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 // email password reset
 app.use("/reset_password", emailRouter);
-// oAuth login/signup
+// Github oAuth login/signup
 app.use("/login/github", githubAuth);
+// Reddit oAuth login/signup
+app.use("/login/reddit", redditAuth);
+
 // Get oAuth token to client
 app.use("/oauthjwt", makeOauthJwt);
+// Get Unsplash Photos
+app.use("/api/photos", random);
 
 // Serve Static Assets in prod
 

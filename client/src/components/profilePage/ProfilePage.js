@@ -26,23 +26,31 @@ class ProfilePage extends Component {
     // console.log("this.props.auth", this.props.auth);
     return (
       <div>
+        <div
+          css={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginLeft: "1rem",
+            marginRight: "2rem"
+          }}
+        >
+          {this.props.auth.isAuthenticated ? (
+            <span>
+              <h3 className="headingTertiary">Hey there, {user.name}</h3>
+            </span>
+          ) : null}
+          <Button text="Logout" onClick={this.onLogoutClick} />
+        </div>
         <section
           css={{
             backgroundColor: "$color-grey-light-1",
-            display: "flex",
-            justifyContent: "center",
+
             position: "relative",
             maxWidth: "80vw",
             margin: "auto"
           }}
           className="masonry-container"
         >
-          {this.props.auth.isAuthenticated ? (
-            <span>
-              <b>Hey there,</b> {user.name}
-            </span>
-          ) : null}
-          <Button text="Logout" onClick={this.onLogoutClick} />
           <div
             className="masonry"
             css={{

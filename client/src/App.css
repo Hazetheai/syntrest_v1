@@ -1,18 +1,20 @@
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Inconsolata", monospace;
   font-weight: 400;
   /* font-size: 16px; */
   line-height: 1.7;
   color: #c4c4c4;
 }
 
-.heading-primary {
+.headingPrimary {
   color: azure;
   text-transform: uppercase;
   backface-visibility: hidden;
   margin-bottom: 60px;
+  font-size: 5.5rem;
+  letter-spacing: 2rem;
 }
-.heading-primary--main {
+.headingPrimaryMain {
   display: block;
   font-size: 6rem;
   font-weight: 400;
@@ -21,12 +23,12 @@ body {
   /* animation-delay: 3s; */
 }
 @media only screen and (max-width: 37.5em) {
-  .heading-primary--main {
+  .headingPrimaryMain {
     letter-spacing: 1rem;
     font-family: 5rem;
   }
 }
-.heading-primary--sub {
+.headingPrimarySub {
   display: block;
   font-size: 2rem;
   font-weight: 700;
@@ -34,12 +36,12 @@ body {
   animation: moveInRight 1s ease-in-out;
 }
 @media only screen and (max-width: 37.5em) {
-  .heading-primary--sub {
+  .headingPrimarySub {
     letter-spacing: 0.5rem;
   }
 }
 
-.heading-secondary {
+.headingSecondary {
   font-size: 3.5rem;
   text-transform: uppercase;
   font-weight: 700;
@@ -52,29 +54,29 @@ body {
   transition: all 0.3s;
 }
 @media only screen and (max-width: 56.25em) {
-  .heading-secondary {
+  .headingSecondary {
     font-size: 3rem;
   }
 }
 @media only screen and (max-width: 37.5em) {
-  .heading-secondary {
+  .headingSecondary {
     font-size: 2.5rem;
   }
 }
-.heading-secondary:hover {
+.headingSecondary:hover {
   transform: skewY(0.5deg) skewX(3deg) scale(1.05);
   text-shadow: 0.5rem 1rem 2rem rgba(17, 17, 17, 0.2);
 }
 
-.heading-tertiary {
-  font-size: 1.6rem;
-  font-weight: 700;
+.headingTertiary {
+  font-size: 2.5rem;
+  font-weight: 400;
   text-transform: uppercase;
 }
 
-.paragraph {
-  font-size: 1.6rem;
+p {
+  font-size: 2rem;
 }
-.paragraph:not(:last-child) {
+p:not(:last-child) {
   margin-bottom: 3rem;
 }

@@ -2,7 +2,6 @@
 import { jsx } from "@emotion/core";
 
 import jwt_decode from "jwt-decode";
-import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { logoutUser, setCurrentUser } from "./actions/authActions";
@@ -10,16 +9,16 @@ import "./App.css";
 import Loading from "./components/auth/Loading";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-import { MoreBtn } from "./components/buttons/MoreBtn";
-import { SaveBtn } from "./components/buttons/SaveBtn";
-import { ShareBtn } from "./components/buttons/ShareBtn";
-import SoloCard from "./components/cards/Card";
-import CardImg from "./components/cards/CardImage";
-import { Comment } from "./components/cards/Comment";
+// import { MoreBtn } from "./components/buttons/MoreBtn";
+// import { SaveBtn } from "./components/buttons/SaveBtn";
+// import { ShareBtn } from "./components/buttons/ShareBtn";
+// import SoloCard from "./components/cards/Card";
+// import CardImg from "./components/cards/CardImage";
+// import { Comment } from "./components/cards/Comment";
+// import { CardNav as Nav } from "./components/nav/CardNav";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import Landing from "./components/layouts/Landing";
-import { CardNav as Nav } from "./components/nav/CardNav";
 import RecoverPassword from "./components/PasswordReset/RecoverPassword";
 import UpdatePassword from "./components/PasswordReset/UpdatePassword";
 import PrivateRoute from "./components/private-routes/PrivateRoute";
@@ -75,9 +74,12 @@ function App() {
             )}
           />
           <Route
-            path="/auth/github/callback/:accessToken"
+            path="/auth/:platform/callback/:accessToken"
             render={({ match }) => (
-              <Loading accessToken={match.params.accessToken} />
+              <Loading
+                accessToken={match.params.accessToken}
+                platform={match.params.platform}
+              />
             )}
           />
           <Switch>

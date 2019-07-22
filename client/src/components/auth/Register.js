@@ -9,6 +9,7 @@ import { Link, withRouter } from "react-router-dom";
 import { registerUser } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
 import GithubBtn from "../buttons/GithubBtn";
+import RedditBtn from "../buttons/RedditBtn";
 
 class Register extends Component {
   constructor(props) {
@@ -202,6 +203,21 @@ class Register extends Component {
           <GithubBtn text="Github">
             <i class="fab fa-github" />{" "}
           </GithubBtn>
+        </a>
+
+        {/* /api/v1/authorize.compact? **TODO** Use this on smaller screens */}
+
+        <a
+          href={`https://www.reddit.com/api/v1/authorize?api_key&client_id=${
+            process.env.REACT_APP_REDDIT_CLIENT_ID
+          }&redirect_uri=${
+            process.env.REACT_APP_REDDIT_CALLBACK_URL
+          }&response_type=code&scope=identity&state=PUT_ANY_STRING_HERE
+`}
+        >
+          <RedditBtn text="Reddit">
+            <i class="fab fa-reddit" />{" "}
+          </RedditBtn>
         </a>
       </div>
     );
