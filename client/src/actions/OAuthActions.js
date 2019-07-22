@@ -4,9 +4,12 @@ import setAuthToken from "../utils/setAuthToken";
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 
 // Login - get user token
-export const loginOAuth = accessToken => dispatch => {
+export const loginOAuth = (accessToken, platform) => dispatch => {
   axios
-    .post("/oauthjwt/token", { token: accessToken })
+    .post(`/oauthjwt/token/${platform}`, {
+      token: accessToken,
+      platform: platform
+    })
     .then(res => {
       // console.log("res.data", res.data);
       const { token } = res.data;
