@@ -91,19 +91,19 @@ const Keyboard = () => {
       })
     );
 
-    // window.addEventListener(
-    //   "keydown",
-    //   (onkeydown = e => {
-    //     synth.triggerAttack(keyToPitch[e.key], Tone.context.currentTime);
-    //   })
-    // );
+    window.addEventListener(
+      "keydown",
+      (onkeydown = e => {
+        synth.triggerAttack(keyToPitch[e.key], Tone.context.currentTime);
+      })
+    );
 
-    // window.addEventListener(
-    //   "keyup",
-    //   (onkeyup = e => {
-    //     synth.triggerRelease();
-    //   })
-    // );
+    window.addEventListener(
+      "keyup",
+      (onkeyup = e => {
+        synth.triggerRelease();
+      })
+    );
   }, [keyToPitch, synth]);
 
   return (
