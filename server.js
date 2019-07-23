@@ -10,6 +10,7 @@ const { githubAuth } = require("./routes/api/githubAuth");
 const { redditAuth } = require("./routes/api/redditAuth");
 const makeOauthJwt = require("./routes/modules/makeoAuthJwt");
 const { random } = require("./routes/api/unsplash");
+const { upload } = require("./routes/api/fileUpload");
 
 const app = express();
 
@@ -47,11 +48,12 @@ app.use("/reset_password", emailRouter);
 app.use("/login/github", githubAuth);
 // Reddit oAuth login/signup
 app.use("/login/reddit", redditAuth);
-
 // Get oAuth token to client
 app.use("/oauthjwt", makeOauthJwt);
 // Get Unsplash Photos
 app.use("/api/photos", random);
+// File Upload
+app.use("/api/file", upload);
 
 // Serve Static Assets in prod
 
