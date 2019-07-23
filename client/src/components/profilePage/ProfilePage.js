@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
 import { MasonryBrick as Brick } from "../layouts/MasonryBrick";
+import Upload from "./Upload";
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -51,6 +52,7 @@ class ProfilePage extends Component {
           }}
           className="masonry-container"
         >
+          <Upload />
           <div
             className="masonry"
             css={{
