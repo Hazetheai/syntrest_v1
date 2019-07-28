@@ -9,12 +9,12 @@ const users = require("./routes/api/users");
 const { githubAuth } = require("./routes/api/githubAuth");
 const { redditAuth } = require("./routes/api/redditAuth");
 const makeOauthJwt = require("./routes/modules/makeoAuthJwt");
-const { random } = require("./routes/api/unsplash");
-const { upload } = require("./routes/api/fileUpload");
+const { random } = require("./routes/services/unsplash");
+const { upload } = require("./routes/services/singleFileUpload");
+const uploadRouter = require("./routes/api/fileUpload");
 
 const app = express();
 
-// Bodyparser middleware
 app.use(
   bodyParser.urlencoded({
     extended: false
@@ -23,8 +23,7 @@ app.use(
 
 app.use(bodyParser.json());
 
-// DB Config
-const db = require("./config/keys").mongoURI || process.env.MONGO_URI;
+const db = process.env.MONGO_URI || require("./config/keys").mongoURI;
 
 // Connect to MongoDB
 mongoose
@@ -32,31 +31,26 @@ mongoose
   .then(() => console.log("Mongo is a go go"))
   .catch(err => console.log(err));
 
-// Passport Middleware
 app.use(passport.initialize());
-
-// Passport config
 
 require("./config/passport")(passport);
 
 // Routes
 // email login/register
 app.use("/api/users", users);
-// email password reset
 app.use("/reset_password", emailRouter);
-// Github oAuth login/signup
 app.use("/login/github", githubAuth);
-// Reddit oAuth login/signup
 app.use("/login/reddit", redditAuth);
-// Get oAuth token to client
 app.use("/oauthjwt", makeOauthJwt);
+
 // Get Unsplash Photos
 app.use("/api/photos", random);
+
 // File Upload
 app.use("/api/file", upload);
+app.use("/services/files", uploadRouter);
 
 // Serve Static Assets in prod
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
