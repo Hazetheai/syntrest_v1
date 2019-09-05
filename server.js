@@ -12,7 +12,7 @@ const makeOauthJwt = require("./routes/modules/makeoAuthJwt");
 const { random } = require("./routes/services/unsplash");
 const { upload } = require("./routes/services/singleFileUpload");
 const uploadRouter = require("./routes/api/fileUpload");
-
+const multUploadRouter = require("./routes/api/multFileUpload");
 const app = express();
 
 app.use(
@@ -47,8 +47,9 @@ app.use("/oauthjwt", makeOauthJwt);
 app.use("/api/photos", random);
 
 // File Upload
-app.use("/api/file", upload);
-app.use("/services/files", uploadRouter);
+// app.use("/api/file", upload); Single upload to client
+app.use("/services/file", uploadRouter); // single upload
+app.use("/services/files", multUploadRouter); // Multiple Upload
 
 // Serve Static Assets in prod
 if (process.env.NODE_ENV === "production") {
