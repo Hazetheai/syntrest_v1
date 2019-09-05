@@ -10,7 +10,6 @@ const { githubAuth } = require("./routes/api/githubAuth");
 const { redditAuth } = require("./routes/api/redditAuth");
 const makeOauthJwt = require("./routes/modules/makeoAuthJwt");
 const { random } = require("./routes/services/unsplash");
-const { upload } = require("./routes/services/singleFileUpload");
 const uploadRouter = require("./routes/api/fileUpload");
 const multUploadRouter = require("./routes/api/multFileUpload");
 const app = express();
