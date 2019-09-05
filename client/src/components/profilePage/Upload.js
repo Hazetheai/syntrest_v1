@@ -10,32 +10,35 @@ const Upload = () => {
   const [uploadedFile, setUploadedFile] = useState({});
 
   const onChange = e => {
-    setFile(e.target.files[0]);
-    setFileName(e.target.files[0].name);
+    if (e.target.files.length >= 1) {
+      setFile(e.target.files[0]);
+      setFileName(e.target.files[0].name);
+    }
   };
 
   const onSubmit = async e => {
     e.preventDefault();
+    if (!file) return;
     const formData = new FormData();
-    // The string here references "const file = req.files.file;" in fileUpload.js
-    formData.append("file", file);
+    // The string here references "const {file} = req.files;" in fileUpload.js
+    formData.append("image", file);
 
     try {
-      const res = await axios.post("/api/file/upload", formData, {
+      const res = await axios.post("/services/file/image-upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       });
-      console.log("res", res);
       const { fileName, filePath } = res.data;
       setUploadedFile({ fileName, filePath });
+      res.status === 200 ? setFile("") : console.error("res", res);
     } catch (err) {
       if (err.response.status === 500) {
-        console.log("There was a problem with the server");
+        console.error("There was a problem with the server");
       } else {
-        console.log(err.response.data.msg);
+        console.error(err.response.data.msg);
       }
-      console.log("err", err);
+      console.error("err", err);
     }
   };
 
@@ -109,7 +112,7 @@ const Upload = () => {
           <input css={inputs} type="submit" value="Upload" className="btn" />
         </form>
 
-        {uploadedFile ? (
+        {uploadedFile.fileName ? (
           <div>
             <h3>{uploadedFile.fileName}</h3>
             <img
