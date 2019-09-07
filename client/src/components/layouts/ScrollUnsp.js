@@ -40,6 +40,7 @@ export class Scroll extends Component {
         searchTerm: "synthesizers"
       })
     );
+    console.log("searching for next images", this.state.images);
   }
 
   fetchImages = () => {
@@ -56,13 +57,13 @@ export class Scroll extends Component {
     return (
       <div>
         <InfiniteScroll
-          dataLength={this.state.images.length}
+          dataLength={this.state.images.length || 0}
           next={this.fetchImages}
           hasMore={true}
           loader={<h4>Loading...</h4>}
         >
           {this.state.images.map(image => (
-            <Image key={image.id} image={image} />
+            <Image key={image.id + Math.random().toFixed(6)} image={image} />
           ))}
         </InfiniteScroll>
       </div>
