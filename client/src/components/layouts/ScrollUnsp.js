@@ -51,20 +51,26 @@ export class Scroll extends Component {
         images: this.state.images.concat(res.data.results)
       })
     );
+    console.log("fetched Images");
   };
 
   render() {
     return (
       <div>
         <InfiniteScroll
-          dataLength={this.state.images.length || 0}
+          dataLength={this.state.images ? this.state.images.length : 30}
           next={this.fetchImages}
           hasMore={true}
           loader={<h4>Loading...</h4>}
         >
-          {this.state.images.map(image => (
-            <Image key={image.id + Math.random().toFixed(6)} image={image} />
-          ))}
+          {this.state.images
+            ? this.state.images.map(image => (
+                <Image
+                  key={image.id + Math.random().toFixed(6)}
+                  image={image}
+                />
+              ))
+            : null}
         </InfiniteScroll>
       </div>
     );
