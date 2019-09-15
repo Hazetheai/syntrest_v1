@@ -3,22 +3,22 @@
 
 *node_modules
 node_modules
-/front-end/node_modules
+/client/node_modules
 .env
 config/keys.js
 back-end/config/keys.js
 /config/optPasconfig.js
 
 # dependencies
-/front-end/node_modules
-/front-end/.pnp
-/front-end/.pnp.js
+/client/node_modules
+/client/.pnp
+/client/.pnp.js
 node_modules/
 node_modules
 .pnp
 .pnp.js
 # testing
-/front-end/coverage
+/client/coverage
 coverage
 
 # production
@@ -33,11 +33,11 @@ back-end/config/keys.js
 .env.test.local
 .env.production.local
 
-/front-end/.DS_Store
-/front-end/.env.local
-/front-end/.env.development.local
-/front-end/.env.test.local
-/front-end/.env.production.local
+/client/.DS_Store
+/client/.env.local
+/client/.env.development.local
+/client/.env.test.local
+/client/.env.production.local
 
 .DS_Store
 .env.local
@@ -49,9 +49,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/front-end/npm-debug.log*
-/front-end/yarn-debug.log*
-/front-end/yarn-error.log*
+/client/npm-debug.log*
+/client/yarn-debug.log*
+/client/yarn-error.log*
 
 npm-debug.log*
 yarn-debug.log*
@@ -60,3 +60,7 @@ yarn-error.log*
 
 #media
 raw_images
+
+#testing
+cypress
+cypress.json
