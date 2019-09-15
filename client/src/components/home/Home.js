@@ -6,15 +6,16 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
-import Scroll from "../layouts/ScrollUnsp";
+// import Scroll from "../layouts/ScrollUnsp";
+import ScrollReddit from "../layouts/ScrollReddit";
 
 class Home extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
-    console.log(localStorage.synJwtToken);
+    // console.log(localStorage.synJwtToken);
 
-    console.log(this.props);
+    // console.log(this.props);
   };
 
   render() {
@@ -55,7 +56,8 @@ class Home extends Component {
           }}
           className="masonry-container"
         >
-          <Scroll />
+          {/* <Scroll /> */}
+          <ScrollReddit />
         </section>
       </div>
     );
