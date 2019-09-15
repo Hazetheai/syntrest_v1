@@ -13,25 +13,6 @@ export class Scroll extends Component {
     searchTerm: "synth"
   };
 
-  //   componentDidMount() {
-  //     const { count, start } = this.state;
-  //     axios.get(`/api/photos/unsplash?count=${count}&start=${start}`).then(res =>
-  //       this.setState({
-  //         images: res.data
-  //       })
-  //     );
-  //   }
-
-  //   fetchImages = () => {
-  //     const { count, start } = this.state;
-  //     this.setState({ start: this.state.start + count });
-  //     axios.get(`/api/photos/unsplash?count=${count}&start=${start}`).then(res =>
-  //       this.setState({
-  //         images: this.state.images.concat(res.data)
-  //       })
-  //     );
-  //   };
-
   componentDidMount() {
     const { searchTerm } = this.state;
     axios.get(`/api/photos/unsplash/synth?searchTerm=${searchTerm}`).then(res =>
