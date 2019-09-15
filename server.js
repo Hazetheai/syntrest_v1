@@ -11,6 +11,7 @@ const { redditAuth } = require("./routes/api/redditAuth");
 const makeOauthJwt = require("./routes/modules/makeoAuthJwt");
 const { random } = require("./routes/services/unsplash");
 const uploadRouter = require("./routes/api/fileUpload");
+const reddit = require("./routes/services/reddit").rSynth;
 // const multUploadRouter = require("./routes/api/multFileUpload");
 const app = express();
 
@@ -44,6 +45,9 @@ app.use("/oauthjwt", makeOauthJwt);
 
 // Get Unsplash Photos
 app.use("/api/photos", random);
+
+// Get Reddit post images
+app.use("/api/services/reddit", reddit);
 
 // File Upload
 // app.use("/api/file", upload); Single upload to client
