@@ -31,20 +31,3 @@ const rSynth = app.get("/rsynthesizers", (req, res) => {
 });
 
 module.exports = { rSynth };
-
-// todaysArray()
-//   .then(posts => posts.filter(el => /\.jpg$/.test(el.data.url)))
-//   .then(imgPosts =>
-//     console.log(
-//       imgPosts.map(el =>
-//         el.data.preview.images.map(el =>
-//           el.resolutions[4]
-//             ? el.resolutions[4].url
-//             : el.resolutions[3]
-//             ? el.resolutions[3].url
-//             : el.resolutions[2].url
-//         )
-//       )
-//     )
-//   )
-//   .catch(err => console.error(err));
