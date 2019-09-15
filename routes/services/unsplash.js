@@ -18,7 +18,8 @@ const random = app.get("/unsplash", (req, res) => {
     .then(toJson)
     .then(json => {
       return res.json(json);
-    });
+    })
+    .catch(err => console.error(err));
 });
 
 const synth = app.get("/unsplash/synth", (req, res) => {
@@ -28,7 +29,7 @@ const synth = app.get("/unsplash/synth", (req, res) => {
     .then(json => {
       return res.json(json);
     })
-    .catch(console.error());
+    .catch(err => console.error(err));
 });
 
 module.exports = { random, synth };
