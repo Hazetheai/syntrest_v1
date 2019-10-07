@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
+const emailController = require("../controllers/emailConfirmController");
 
 // Load user input validation
 
@@ -16,6 +17,13 @@ const User = require("../../models/User");
 // @route POST api/users/register
 // @desc Register user
 // @access Public
+const confirm = async email => {
+  setTimeout(() => {
+    let user = User.findOne({ email }).exec();
+    console.log("newUSer", user);
+  }, 5000);
+  emailController.sendConfirmationEmail(email);
+};
 
 router.post("/register", (req, res) => {
   // Form validation
@@ -33,7 +41,8 @@ router.post("/register", (req, res) => {
       const newUser = new User({
         email: req.body.email,
         name: req.body.name,
-        password: req.body.password
+        password: req.body.password,
+        confirmed: false
       });
 
       // Hash password before saving in database
@@ -47,8 +56,11 @@ router.post("/register", (req, res) => {
             .catch(err => console.log(err));
         });
       });
+      // if (req.body.email) console.log("req.body.email", req.body.email);
     }
   });
+  confirm(req.body.email);
+  console.log("confirm func in users file sent");
 });
 
 // @route POST api/users/login
@@ -61,13 +73,18 @@ router.post("/login", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email } = req.body;
+  const { password } = req.body;
+  const { confirmed } = req.body;
   // Find user by email
   User.findOne({ email }).then(user => {
     // Check if user exists
     if (!user) {
       return res.status(404).json({ emailnotfound: "Email not found" });
+    }
+
+    if (!user.confirmed) {
+      return res.status(403).json({ emailnotconfirmed: "Email not confirmed" });
     }
     // Check password
     bcrypt.compare(password, user.password).then(isMatch => {
