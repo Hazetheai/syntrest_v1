@@ -25,6 +25,8 @@ import PrivateRoute from "./components/private-routes/PrivateRoute";
 import ProfilePage from "./components/profilePage/ProfilePage";
 import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
+import Confirmed from "./components/auth/Confirmed";
+import Unconfirmed from "./components/auth/Unconfirmed";
 
 // Check for token to keep user logged in
 if (localStorage.synJwtToken) {
@@ -81,6 +83,12 @@ function App() {
                 platform={match.params.platform}
               />
             )}
+          />
+          <Route exact path="/unconfirmed" component={Unconfirmed} />
+          <Route
+            exact
+            path="/confirmed/email-confirmed"
+            component={Confirmed}
           />
           <Switch>
             <PrivateRoute exact path="/profile" component={ProfilePage} />
