@@ -53,7 +53,7 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2
     };
-    // console.log(newUser);
+    console.log(newUser);
     this.props.registerUser(newUser, this.props.history);
   };
 
@@ -196,9 +196,7 @@ class Register extends Component {
           <Button type="submit" text="Sign up" />
         </form>
         <a
-          href={`https://github.com/login/oauth/authorize?client_id=${
-            process.env.REACT_APP_GITHUB_CLIENT_ID
-          }`}
+          href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`}
         >
           <GithubBtn text="Github">
             <i class="fab fa-github" />{" "}
@@ -208,11 +206,7 @@ class Register extends Component {
         {/* /api/v1/authorize.compact? **TODO** Use this on smaller screens */}
 
         <a
-          href={`https://www.reddit.com/api/v1/authorize?api_key&client_id=${
-            process.env.REACT_APP_REDDIT_CLIENT_ID
-          }&redirect_uri=${
-            process.env.REACT_APP_REDDIT_CALLBACK_URL
-          }&response_type=code&scope=identity&state=PUT_ANY_STRING_HERE
+          href={`https://www.reddit.com/api/v1/authorize?api_key&client_id=${process.env.REACT_APP_REDDIT_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDDIT_CALLBACK_URL}&response_type=code&scope=identity&state=PUT_ANY_STRING_HERE
 `}
         >
           <RedditBtn text="Reddit">
