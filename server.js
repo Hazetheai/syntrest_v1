@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -5,6 +6,7 @@ const passport = require("passport");
 const path = require("path");
 
 const emailRouter = require("./routes/controllers/email.restRouter");
+const confirmRouter = require("./routes/controllers/emailConfirmRouter");
 const users = require("./routes/api/users");
 const { githubAuth } = require("./routes/api/githubAuth");
 const { redditAuth } = require("./routes/api/redditAuth");
@@ -24,7 +26,6 @@ app.use(
 app.use(bodyParser.json());
 
 const db = process.env.MONGO_URI || require("./config/keys").mongoURI;
-
 // Connect to MongoDB
 mongoose
   .connect(db, { useNewUrlParser: true })
@@ -39,6 +40,7 @@ require("./config/passport")(passport);
 // email login/register
 app.use("/api/users", users);
 app.use("/reset_password", emailRouter);
+app.use("/confirmed", confirmRouter);
 app.use("/login/github", githubAuth);
 app.use("/login/reddit", redditAuth);
 app.use("/oauthjwt", makeOauthJwt);
