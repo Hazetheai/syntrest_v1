@@ -20,6 +20,10 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false
   },
+  confirmHash: {
+    type: String,
+    default: ""
+  },
   date: {
     type: Date,
     default: Date.now
