@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
+const randomize = require("../controllers/randomize");
 const emailController = require("../controllers/emailConfirmController");
 
 // Load user input validation
@@ -18,8 +19,9 @@ const User = require("../../models/User");
 // @desc Register user
 // @access Public
 const confirm = async email => {
+  let user;
   setTimeout(() => {
-    let user = User.findOne({ email }).exec();
+    user = User.findOne({ email }).exec();
     console.log("newUSer", user);
   }, 5000);
   emailController.sendConfirmationEmail(email);
@@ -42,6 +44,7 @@ router.post("/register", (req, res) => {
         email: req.body.email,
         name: req.body.name,
         password: req.body.password,
+        confirmHash: randomize(req.body.email + Date.now.toString()),
         confirmed: false
       });
 
@@ -56,6 +59,7 @@ router.post("/register", (req, res) => {
             .catch(err => console.log(err));
         });
       });
+
       // if (req.body.email) console.log("req.body.email", req.body.email);
     }
   });
