@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 const db = process.env.MONGO_URI || require("./config/keys").mongoURI;
 // Connect to MongoDB
 mongoose
-  .connect(db, { useNewUrlParser: true })
+  .connect(db, { useNewUrlParser: true, useFindAndModify: false })
   .then(() => console.log("Mongo is a go go"))
   .catch(err => console.log(err));
 
