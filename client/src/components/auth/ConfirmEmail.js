@@ -1,0 +1,77 @@
+/**@jsx jsx */
+
+import { jsx } from "@emotion/core";
+import axios from "axios";
+import PropTypes from "prop-types";
+import { Component } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "../buttons/Button";
+// const SERVER_URI = "localhost:5000";
+class ConfirmEmail extends Component {
+  state = {
+    userId: "",
+    token: "",
+    confirmed: false
+  };
+  //   handleChange = key => e => {
+  //     this.setState({ [key]: e.target.value });
+  //   };
+  updatePassword = e => {
+    e.preventDefault();
+    const { userId, token } = this.props;
+    const { password } = this.state;
+    axios
+      .post(`/reset_password/receive_new_password/${userId}/${token}`, {
+        password
+      })
+      .then(res => console.log("RESPONSE FROM SERVER TO CLIENT:", res))
+      .catch(err => console.log("SERVER ERROR TO CLIENT:", err));
+    this.setState({ submitted: !this.state.submitted });
+  };
+
+  componentDidMount() {
+    this.setState({
+      userId: this.props.userId,
+      token: this.props.token,
+      confirmed: true
+    });
+    const { userId, token } = this.props;
+
+    axios
+      .post(`/confirmed/email-confirmed/${userId}/${token}`)
+      .then(res => console.log("RESPONSE FROM SERVER TO CLIENT:", res))
+      .catch(err => console.log("SERVER ERROR TO CLIENT:", err));
+    this.setState({ submitted: "We submitted" });
+  }
+  render() {
+    console.log("props", this.props);
+
+    const { confirmed } = this.state;
+    console.log("this.state", this.state);
+    return (
+      <div>
+        <h3 style={{ paddingBottom: "1.25rem" }}>Email Confirmation</h3>
+        {confirmed ? (
+          <div className="reset-password-form-sent-wrapper">
+            <h2>That's it! Now for the good stuff</h2>
+            <p>Hit the login button to continue</p>
+            <p>Have Fun!</p>
+
+            <Link to="/login" className="ghost-btn">
+              Sign back in
+            </Link>
+          </div>
+        ) : (
+          <div className="reset-password-form-wrapper">
+            <p>Whoops! Somethings gone wrong. We'll be with you shortly.</p>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+ConfirmEmail.propTypes = {
+  token: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired
+};
+export default ConfirmEmail;
