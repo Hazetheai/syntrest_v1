@@ -8,8 +8,11 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const emailConfirmationURL = (user, token) =>
-  `${process.env.CLIENT_URI}/confirmed/email-confirmed/${user._id}/${token}`;
+const emailConfirmationURL = (user, token) => {
+  return `${process.env.CLIENT_URI}/confirmed/email-confirmed/${
+    user["_id"]
+  }/${token}`;
+};
 
 const confirmEmailTemplate = (user, url) => {
   const from = process.env.EMAIL_LOGIN;
