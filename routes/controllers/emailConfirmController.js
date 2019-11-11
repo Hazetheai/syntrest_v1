@@ -6,26 +6,24 @@ const {
   emailConfirmationURL,
   transporter
 } = require("../modules/confirmEmail");
-
+const secret = {};
 const useRandomSliceOfPasswordHashToMakeToken = ({
   password: passwordHash,
   _id: userId,
   createdAt
 }) => {
-  const secret = randomize(passwordHash) + "-" + createdAt;
-  const token = jwt.sign({ userId }, secret, {
+  secret.code = randomize(passwordHash) + "-" + createdAt;
+  const token = jwt.sign({ userId }, secret.code, {
     expiresIn: 3600 //1hr
   });
-  console.log("Made hash browns. Yum. Check it -->", token);
+
   return token;
 };
 
 const sendConfirmationEmail = async email => {
-  console.log("emailInConfirm Func", email);
   let user;
   try {
     user = await User.findOne({ email }).exec(); // Cannot find User ???
-    console.log("user", user);
   } catch (err) {
     res.status(404).json("No user with that email");
   }
@@ -37,27 +35,28 @@ const sendConfirmationEmail = async email => {
     transporter.sendMail(emailTemplate, (err, info) => {
       if (err) {
         res.status(500).json("Error sending email %%@$@£");
-        console.log("Error is: ", err, "Info is: ", info);
       }
-      console.log(`** Email confirmation sent **`, info.response);
     });
   };
 
   sendEmail();
 };
 
-const confirmEmail = (req, res) => {
+const confirmEmail = async (req, res) => {
   const { userId, token } = req.params;
-
-  // Highlight Start -- Callback hell -- **Refactoring needed**
-
-  User.findOne({ _id: userId })
+  console.log(userId, token);
+  await User.findOne({ _id: userId })
     .then(user => {
-      const payload = jwt.decode(token, secret);
+      const payload = jwt.decode(token, secret.code);
       if (payload.userId === user.id) {
-        User.findOneAndUpdate({ _id: userId }, { confirmed: true });
+        User.findOneAndUpdate({ _id: userId }, { confirmed: true }).then(
+          result => {
+            res.status(202).json("Huzzah! - We've got your data, Data!!");
+
+            console.log("result of findOneANUpdate", result);
+          }
+        );
       }
-      console.log("Confirmed! Huzzah!", user.confirmed);
     })
 
     // highlight end
