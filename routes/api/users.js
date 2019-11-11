@@ -18,15 +18,6 @@ const User = require("../../models/User");
 // @route POST api/users/register
 // @desc Register user
 // @access Public
-const confirm = async email => {
-  let user;
-  setTimeout(() => {
-    user = User.findOne({ email }).exec();
-    console.log("newUSer", user);
-  }, 5000);
-  emailController.sendConfirmationEmail(email);
-};
-
 router.post("/register", (req, res) => {
   // Form validation
 
@@ -53,18 +44,14 @@ router.post("/register", (req, res) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
-          newUser
-            .save()
-            .then(user => res.json(user))
-            .catch(err => console.log(err));
+          newUser.save().then(user => res.json(user));
         });
       });
-
-      // if (req.body.email) console.log("req.body.email", req.body.email);
     }
   });
-  confirm(req.body.email);
-  console.log("confirm func in users file sent");
+  setTimeout(() => {
+    emailController.sendConfirmationEmail(req.body.email);
+  }, 5000);
 });
 
 // @route POST api/users/login
@@ -111,7 +98,6 @@ router.post("/login", (req, res) => {
               success: true,
               token: "Bearer " + token
             });
-            console.log("token", token);
           }
         );
       } else {
