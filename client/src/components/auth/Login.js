@@ -10,6 +10,7 @@ import { loginUser } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
 import GithubBtn from "../buttons/GithubBtn";
 import RedditBtn from "../buttons/RedditBtn";
+import axios from "axios";
 
 class Login extends Component {
   constructor() {
@@ -18,6 +19,7 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      confirmed: false,
       errors: {}
     };
 
@@ -43,6 +45,13 @@ class Login extends Component {
       });
     }
   }
+
+  handleEmailConfirmNotSent = () => {
+    const reconfirmData = { email: this.state.errors.email };
+    axios
+      .post("/api/users/no-confirmation/resend", reconfirmData)
+      .then(data => console.log(data.data));
+  };
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -131,6 +140,7 @@ class Login extends Component {
           <span className="red-text">
             {errors.password}
             {errors.passwordincorrect}
+            {errors.emailnotconfirmed}
           </span>
 
           <input
@@ -151,7 +161,13 @@ class Login extends Component {
               borderRadius: "5px"
             }}
           />
-          <Button type="submit" text="Login" />
+          {errors.emailnotconfirmed ? (
+            <button onClick={this.handleEmailConfirmNotSent}>
+              Didn't get an email
+            </button>
+          ) : (
+            <Button type="submit" text="Login" />
+          )}
 
           <Link to="/password/recover">
             <p>Forgot your password? </p>
@@ -160,9 +176,7 @@ class Login extends Component {
         <div>
           {/* TODO ==> ADD An unguessable random string. It is used to protect against cross-site request forgery attacks. */}
           <a
-            href={`https://github.com/login/oauth/authorize?client_id=${
-              process.env.REACT_APP_GITHUB_CLIENT_ID
-            }`}
+            href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`}
           >
             <GithubBtn text="Github">
               <i class="fab fa-github" />{" "}
@@ -172,11 +186,7 @@ class Login extends Component {
           {/* /api/v1/authorize.compact? **TODO** Use this on smaller screens */}
 
           <a
-            href={`https://www.reddit.com/api/v1/authorize?api_key&client_id=${
-              process.env.REACT_APP_REDDIT_CLIENT_ID
-            }&redirect_uri=${
-              process.env.REACT_APP_REDDIT_CALLBACK_URL
-            }&response_type=code&scope=identity&state=PUT_ANY_STRING_HERE
+            href={`https://www.reddit.com/api/v1/authorize?api_key&client_id=${process.env.REACT_APP_REDDIT_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDDIT_CALLBACK_URL}&response_type=code&scope=identity&state=PUT_ANY_STRING_HERE
 `}
           >
             <RedditBtn text="Reddit">
@@ -198,7 +208,4 @@ const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
-export default connect(
-  mapStateToProps,
-  { loginUser }
-)(Login);
+export default connect(mapStateToProps, { loginUser })(Login);
