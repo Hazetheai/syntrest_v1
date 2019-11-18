@@ -50,7 +50,7 @@ router.post("/register", (req, res) => {
     }
   });
   setTimeout(() => {
-    emailController.sendConfirmationEmail(req.body.email);
+    emailController.sendConfirmationEmail(req.body.email, req, res);
   }, 5000);
 });
 
