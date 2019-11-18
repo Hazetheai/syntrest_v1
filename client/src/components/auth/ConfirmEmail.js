@@ -5,7 +5,6 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "../buttons/Button";
 // const SERVER_URI = "localhost:5000";
 class ConfirmEmail extends Component {
   state = {
