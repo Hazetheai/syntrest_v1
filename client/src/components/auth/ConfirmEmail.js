@@ -23,7 +23,7 @@ class ConfirmEmail extends Component {
       .post(`/reset_password/receive_new_password/${userId}/${token}`, {
         password
       })
-      .then(res => console.log("RESPONSE FROM SERVER TO CLIENT:", res))
+      .then(res => res)
       .catch(err => console.log("SERVER ERROR TO CLIENT:", err));
     this.setState({ submitted: !this.state.submitted });
   };
@@ -38,15 +38,12 @@ class ConfirmEmail extends Component {
 
     axios
       .post(`/confirmed/email-confirmed/${userId}/${token}`)
-      .then(res => console.log("RESPONSE FROM SERVER TO CLIENT:", res))
+      .then(res => res)
       .catch(err => console.log("SERVER ERROR TO CLIENT:", err));
     this.setState({ submitted: "We submitted" });
   }
   render() {
-    console.log("props", this.props);
-
     const { confirmed } = this.state;
-    console.log("this.state", this.state);
     return (
       <div>
         <h3 style={{ paddingBottom: "1.25rem" }}>Email Confirmation</h3>
