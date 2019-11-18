@@ -20,12 +20,13 @@ const useRandomSliceOfPasswordHashToMakeToken = ({
   return token;
 };
 
-const sendConfirmationEmail = async email => {
+const sendConfirmationEmail = async (email, req, res) => {
   let user;
   try {
-    user = await User.findOne({ email }).exec(); // Cannot find User ???
+    user = await User.findOne({ email }).exec();
   } catch (err) {
-    res.status(404).json("No user with that email");
+    // res.status(404).json("No user with that email");
+    console.error("No user with that email", err);
   }
   const token = useRandomSliceOfPasswordHashToMakeToken(user);
   const url = emailConfirmationURL(user, token);
@@ -34,7 +35,8 @@ const sendConfirmationEmail = async email => {
   const sendEmail = () => {
     transporter.sendMail(emailTemplate, (err, info) => {
       if (err) {
-        res.status(500).json("Error sending email %%@$@£");
+        // res.status(500).json("Error sending email %%@$@£");
+        console.error("Error sending email %%@$@£l", err);
       }
     });
   };
