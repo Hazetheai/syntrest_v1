@@ -75,7 +75,10 @@ router.post("/login", (req, res) => {
     }
 
     if (!user.confirmed) {
-      return res.status(403).json({ emailnotconfirmed: "Email not confirmed" });
+      return res.status(403).json({
+        emailnotconfirmed: "Email not confirmed",
+        email: email
+      });
     }
     // Check password
     bcrypt.compare(password, user.password).then(isMatch => {
