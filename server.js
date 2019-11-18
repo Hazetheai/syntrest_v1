@@ -39,6 +39,7 @@ require("./config/passport")(passport);
 // Routes
 // email login/register
 app.use("/api/users", users);
+app.use("/api/users/no-confirmation", confirmRouter);
 app.use("/reset_password", emailRouter);
 app.use("/confirmed", confirmRouter);
 app.use("/login/github", githubAuth);
