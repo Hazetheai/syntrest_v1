@@ -54,6 +54,19 @@ export const deleteUser = userData => dispatch => {
     );
 };
 
+export const resendConfirm = email => dispatch => {
+  const reconfirmData = { email };
+  axios
+    .post("/api/users/no-confirmation/resend", reconfirmData)
+    .then(data => console.log(data.data))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 // Set logged in user
 export const setCurrentUser = decoded => {
   return {
