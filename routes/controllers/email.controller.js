@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../../models/User");
-const randomize = require("./randomize");
+const randomize = require("../modules/randomize");
 const {
   getPasswordResetURL,
   resetPasswordTemplate,
