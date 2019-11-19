@@ -7,10 +7,10 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../actions/authActions";
+import { resendConfirm } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
 import GithubBtn from "../buttons/GithubBtn";
 import RedditBtn from "../buttons/RedditBtn";
-import axios from "axios";
 
 class Login extends Component {
   constructor() {
@@ -22,14 +22,9 @@ class Login extends Component {
       confirmed: false,
       errors: {}
     };
-
-    // this.onChange = this.onChange.bind(this);
-    // this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
-    // console.log("Mounted", this.props);
-    // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated && this.props.history) {
       this.props.history.push("/profile");
     }
@@ -37,7 +32,7 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated || this.props.auth.isAuthenticated) {
-      this.props.history.push("/profile"); // push user to profile when they login
+      this.props.history.push("/profile");
     }
     if (nextProps.errors) {
       this.setState({
@@ -46,11 +41,9 @@ class Login extends Component {
     }
   }
 
-  handleEmailConfirmNotSent = () => {
-    const reconfirmData = { email: this.state.errors.email };
-    axios
-      .post("/api/users/no-confirmation/resend", reconfirmData)
-      .then(data => console.log(data.data));
+  handleEmailConfirmNotSent = e => {
+    e.preventDefault();
+    this.props.resendConfirm(this.state.email);
   };
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -61,7 +54,7 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+
     this.props.loginUser(userData);
   };
 
@@ -162,7 +155,7 @@ class Login extends Component {
             }}
           />
           {errors.emailnotconfirmed ? (
-            <button onClick={this.handleEmailConfirmNotSent}>
+            <button type="button" onClick={this.handleEmailConfirmNotSent}>
               Didn't get an email
             </button>
           ) : (
@@ -200,6 +193,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
+  resendConfirm: PropTypes.func.isRequired,
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
@@ -208,4 +202,4 @@ const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser, resendConfirm })(Login);
