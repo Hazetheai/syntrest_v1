@@ -27,6 +27,7 @@ import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
 import Unconfirmed from "./components/auth/Unconfirmed";
 import ConfirmEmail from "./components/auth/ConfirmEmail";
+import Delete from "./components/auth/Delete";
 
 // Check for token to keep user logged in
 if (localStorage.synJwtToken) {
@@ -97,6 +98,9 @@ function App() {
           />
           <Switch>
             <PrivateRoute exact path="/profile" component={ProfilePage} />
+          </Switch>
+          <Switch>
+            <PrivateRoute exact path="/delete-account" component={Delete} />
           </Switch>
 
           {/* <SoloCard>
