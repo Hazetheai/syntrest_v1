@@ -8,7 +8,7 @@ import { logoutUser } from "../../actions/authActions";
 import { Button } from "../buttons/Button";
 import { MasonryBrick as Brick } from "../layouts/MasonryBrick";
 import Upload from "./Upload";
-
+import { Link } from "react-router-dom";
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
@@ -41,11 +41,13 @@ class ProfilePage extends Component {
             </span>
           ) : null}
           <Button text="Logout" onClick={this.onLogoutClick} />
+          <Link to="delete-account">
+            <Button type="link" text="Delete?"></Button>
+          </Link>
         </div>
         <section
           css={{
             backgroundColor: "$color-grey-light-1",
-
             position: "relative",
             maxWidth: "80vw",
             margin: "auto"
@@ -82,7 +84,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(ProfilePage);
+export default connect(mapStateToProps, { logoutUser })(ProfilePage);
