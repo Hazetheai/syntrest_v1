@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-const randomize = require("../controllers/randomize");
+const randomize = require("../modules/randomize");
 const emailController = require("../controllers/emailConfirmController");
 
 // Load user input validation
@@ -110,6 +110,22 @@ router.post("/login", (req, res) => {
       }
     });
   });
+});
+
+router.post("/delete-account", (req, res) => {
+  const { email } = req.body;
+  User.findOneAndDelete({ email })
+
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ emailnotfound: "Email not found" });
+      }
+      res.json({
+        success: true,
+        message: "So long old friend."
+      });
+    })
+    .catch(err => console.error("Error Deleting User", err));
 });
 
 module.exports = router;
